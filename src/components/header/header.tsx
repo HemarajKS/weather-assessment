@@ -7,9 +7,20 @@ const Header = () => {
       <div className="headerLogo">
         <img src={require('../../assets/images/logo_web.png')} alt="Logo" />
       </div>
-      <div className="headerSearch">
-        <input type="text" className="headerSearchInput" />
-      </div>
+      <form className="headerSearch">
+        <input
+          type="text"
+          className="headerSearchInput"
+          placeholder="Search city"
+        />
+        <button className="headerSearchSubmit">
+          <img
+            src={require('../../assets/icons/icon_search_white.png')}
+            alt="Search"
+            className="headerSearchIcon"
+          />
+        </button>
+      </form>
     </div>
   )
 }
