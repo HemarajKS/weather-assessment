@@ -11,12 +11,13 @@ const Header = () => {
 
   console.log('location Auto', location.data)
 
-  useEffect(() => {
-    dispatch(getLocation('udupi'))
-  }, [])
+  // useEffect(() => {
+  //   dispatch(getLocation('udupi'))
+  // }, [])
 
   const onChangeHandler = (searchString: string) => {
     setSearchValue(searchString)
+    dispatch(getLocation(searchString))
   }
 
   useEffect(() => {
@@ -33,6 +34,7 @@ const Header = () => {
           type="text"
           className="headerSearchInput"
           placeholder="Search city"
+          value={searchValue}
           onChange={(e: any) => {
             onChangeHandler(e.target.value)
           }}
