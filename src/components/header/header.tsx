@@ -28,13 +28,14 @@ const Header = () => {
 
   const submitHandler = (e: any) => {
     e.preventDefault()
+    dispatch(getweather(e.target.search.value))
   }
   return (
     <div className="header">
       <div className="headerLogo">
         <img src={require('../../assets/images/logo_web.png')} alt="Logo" />
       </div>
-      <form className="headerSearch">
+      <form className="headerSearch" onSubmit={submitHandler}>
         <input
           type="text"
           className="headerSearchInput"
@@ -44,7 +45,6 @@ const Header = () => {
             onChangeHandler(e.target.value)
           }}
           name="search"
-          onSubmit={submitHandler}
           autoComplete="off"
         />
         <button className="headerSearchSubmit" type="submit">
