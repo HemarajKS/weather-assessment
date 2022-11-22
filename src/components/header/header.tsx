@@ -6,6 +6,7 @@ import { getweather } from '../../redux/reducers/weatherSlice'
 
 const Header = () => {
   const [searchValue, setSearchValue] = useState('')
+  const [showAutoComplete, setShowAutoComplete] = useState(false)
 
   const dispatch = useDispatch()
   const location = useSelector((state: any) => state.location)
@@ -29,6 +30,7 @@ const Header = () => {
   const submitHandler = (e: any) => {
     e.preventDefault()
     dispatch(getweather(e.target.search.value))
+    setShowAutoComplete(false)
   }
   return (
     <div className="header">
@@ -45,6 +47,9 @@ const Header = () => {
             onChangeHandler(e.target.value)
           }}
           name="search"
+          onFocus={() => {
+            setShowAutoComplete(true)
+          }}
           autoComplete="off"
         />
         <button className="headerSearchSubmit" type="submit">
@@ -55,7 +60,8 @@ const Header = () => {
           />
         </button>
         <div className="headerAutoComplete">
-          {location &&
+          {showAutoComplete &&
+            location &&
             location.data &&
             location.data.data &&
             location.data.data.map(
@@ -68,6 +74,7 @@ const Header = () => {
                   className="headerAutoCompleteItems"
                   onClick={() => {
                     dispatch(getweather(`${ele.lat},${ele.lon}`))
+                    setShowAutoComplete(false)
                   }}
                 >
                   {ele.name}, {ele.region}
