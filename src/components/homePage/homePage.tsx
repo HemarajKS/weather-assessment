@@ -8,7 +8,7 @@ const HomePage = () => {
   return (
     <div className="homePage">
       <div className="homePageBody">
-        <div className="homePageBodyContents"></div>
+        <div className="homePageBodyContents">This is border Top</div>
       </div>
       <Footer />
     </div>

@@ -1,13 +1,12 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-
+import React from 'react';
+import { useSelector } from 'react-redux';
+import './footer.css';
 const Footer = () => {
-  const weather: any = 'x'
+  const weather: any = useSelector((state: any) => state.search);
 
   return (
     <div className="footer">
-      <h1>fOOTER</h1>
-      {weather && weather.data && (
+      {weather && weather.search && (
         <div className="footerBody">
           <div className="footerIcon">
             <img
@@ -19,13 +18,13 @@ const Footer = () => {
           <div className="footerText">
             <div className="footerInfo">Min - Max</div>
             <div className="footerInfoValue">
-              {weather.data.forecasts[0].low + '\u00B0'}
-              {} - {weather.data.forecasts[0].high + '\u00B0'}
+              {weather.search.temp_min + '\u00B0'}
+              {} - {weather.search.temp_max + '\u00B0'}
             </div>
           </div>
         </div>
       )}
-      {weather && weather.data && (
+      {weather && weather.search && (
         <div className="footerBody">
           <div className="footerIcon">
             <img
@@ -35,13 +34,11 @@ const Footer = () => {
           </div>
           <div className="footerText">
             <div className="footerInfo">Precipitation</div>
-            <div className="footerInfoValue">
-              {weather.data.current_observation.atmosphere.rising}%
-            </div>
+            <div className="footerInfoValue">{weather.search.precep}%</div>
           </div>
         </div>
       )}
-      {weather && weather.data && (
+      {weather && weather.search && (
         <div className="footerBody">
           <div className="footerIcon">
             <img
@@ -51,13 +48,11 @@ const Footer = () => {
           </div>
           <div className="footerText">
             <div className="footerInfo">Humidity</div>
-            <div className="footerInfoValue">
-              {weather.data.current_observation.atmosphere.humidity}%
-            </div>
+            <div className="footerInfoValue">{weather.search.humidity}%</div>
           </div>
         </div>
       )}
-      {weather && weather.data && (
+      {weather && weather.search && (
         <div className="footerBody">
           <div className="footerIcon">
             <img
@@ -67,14 +62,11 @@ const Footer = () => {
           </div>
           <div className="footerText">
             <div className="footerInfo">Wind</div>
-            <div className="footerInfoValue">
-              {' '}
-              {weather.data.current_observation.wind.speed} mph
-            </div>
+            <div className="footerInfoValue"> {weather.search.wind} mph</div>
           </div>
         </div>
       )}
-      {weather && weather.data && (
+      {weather && weather.search && (
         <div className="footerBody">
           <div className="footerIcon">
             <img
@@ -85,13 +77,13 @@ const Footer = () => {
           <div className="footerText">
             <div className="footerInfo">Visibility</div>
             <div className="footerInfoValue">
-              {weather.data.current_observation.atmosphere.visibility} miles
+              {weather.search.visibility} miles
             </div>
           </div>
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

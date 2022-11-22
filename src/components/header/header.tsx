@@ -39,7 +39,7 @@ const Header = () => {
         fav: false,
       };
     console.log(data);
-    dispatch(currentSearch(data));
+    data && dispatch(currentSearch(data));
   }, [weather]);
 
   const submitHandler = (e: any) => {
