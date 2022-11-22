@@ -59,10 +59,15 @@ const Header = () => {
     data && dispatch(recentData(data));
     console.log('get recent', getRecent);
     const x =
+      data &&
+      data.id &&
       getRecent &&
       getRecent.data &&
       Object.keys(getRecent.data).map((ele: any) => {
         console.log(getRecent.data[ele].id, data.id);
+        if (getRecent.data[ele].id !== data.id) {
+          console.log('not equal');
+        }
       });
   };
 
