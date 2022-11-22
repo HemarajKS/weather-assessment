@@ -12,8 +12,6 @@ const Header = () => {
   const location = useSelector((state: any) => state.location)
   const weather = useSelector((state: any) => state.weather)
 
-  console.log('location Auto', location.data)
-
   // useEffect(() => {
   //   dispatch(getLocation('udupi'))
   // }, [])
