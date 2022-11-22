@@ -1,9 +1,11 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 import locationSlice from '../reducers/locationAuto'
+import weatherSlice from '../reducers/weatherSlice'
 
 export const store = configureStore({
   reducer: {
     location: locationSlice.reducer,
+    weather: weatherSlice.reducer,
   },
   middleware: getDefaultMiddleware({
     serializableCheck: false,
