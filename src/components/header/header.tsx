@@ -3,6 +3,7 @@ import './header.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { getLocation } from '../../redux/reducers/locationAuto';
 import { getweather } from '../../redux/reducers/weatherSlice';
+import currentData from '../../redux/reducers/currentData';
 
 const Header = () => {
   const [searchValue, setSearchValue] = useState('');
@@ -19,7 +20,7 @@ const Header = () => {
 
   useEffect(() => {
     console.log('weather', weather);
-    const data = weather &&
+    const data: any = weather &&
       weather.data &&
       weather.data.data && {
         id: `${weather.data.data.location.lat},${weather.data.data.location.lon}`,
@@ -37,8 +38,6 @@ const Header = () => {
         visibility: weather.data.data.current.vis_miles,
         fav: false,
       };
-
-    console.log('data', data);
   }, [weather]);
 
   const submitHandler = (e: any) => {
