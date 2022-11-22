@@ -38,7 +38,7 @@ const Header = () => {
         visibility: weather.data.data.current.vis_miles,
         fav: false,
       };
-
+    console.log(data);
     dispatch(currentSearch(data));
   }, [weather]);
 
