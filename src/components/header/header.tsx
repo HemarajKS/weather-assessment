@@ -56,19 +56,26 @@ const Header = () => {
   };
 
   const addToRecentSearch = () => {
-    data && dispatch(recentData(data));
     console.log('get recent', getRecent);
-    const x =
-      data &&
+    let arr: any = [];
+    data &&
       data.id &&
       getRecent &&
       getRecent.data &&
       Object.keys(getRecent.data).map((ele: any) => {
         console.log(getRecent.data[ele].id, data.id);
         if (getRecent.data[ele].id !== data.id) {
-          console.log('not equal');
+          return arr.push('not equal');
         }
+        return arr.push('equal');
       });
+
+    console.log('arr', arr);
+
+    if (!arr.includes('equal')) {
+      data && dispatch(recentData(data));
+    } else {
+    }
   };
 
   return (

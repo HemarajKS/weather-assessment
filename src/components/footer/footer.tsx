@@ -18,8 +18,8 @@ const Footer = () => {
           <div className="footerText">
             <div className="footerInfo">Min - Max</div>
             <div className="footerInfoValue">
-              {weather.search.temp_min + '\u00B0'}
-              {} - {weather.search.temp_max + '\u00B0'}
+              {weather.search.temp_min.toFixed(0) + '\u00B0'}
+              {} - {weather.search.temp_max.toFixed(0) + '\u00B0'}
             </div>
           </div>
         </div>
@@ -34,7 +34,9 @@ const Footer = () => {
           </div>
           <div className="footerText">
             <div className="footerInfo">Precipitation</div>
-            <div className="footerInfoValue">{weather.search.precep}%</div>
+            <div className="footerInfoValue">
+              {weather.search.precep.toFixed(0)}%
+            </div>
           </div>
         </div>
       )}
@@ -48,7 +50,9 @@ const Footer = () => {
           </div>
           <div className="footerText">
             <div className="footerInfo">Humidity</div>
-            <div className="footerInfoValue">{weather.search.humidity}%</div>
+            <div className="footerInfoValue">
+              {weather.search.humidity.toFixed(0)}%
+            </div>
           </div>
         </div>
       )}
@@ -62,7 +66,10 @@ const Footer = () => {
           </div>
           <div className="footerText">
             <div className="footerInfo">Wind</div>
-            <div className="footerInfoValue"> {weather.search.wind} mph</div>
+            <div className="footerInfoValue">
+              {' '}
+              {weather.search.wind.toFixed(0)} mph
+            </div>
           </div>
         </div>
       )}
@@ -77,7 +84,7 @@ const Footer = () => {
           <div className="footerText">
             <div className="footerInfo">Visibility</div>
             <div className="footerInfoValue">
-              {weather.search.visibility} miles
+              {weather.search.visibility.toFixed(0)} miles
             </div>
           </div>
         </div>
