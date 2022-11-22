@@ -1,7 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './header.css'
+import { useSelector, useDispatch } from 'react-redux'
+import { getLocation } from '../../redux/reducers/locationAuto'
 
 const Header = () => {
+  const dispatch = useDispatch()
+  const location = useSelector((state: any) => state.location)
+
+  console.log('location Auto', location)
+
+  useEffect(() => {
+    dispatch(getLocation('udupi'))
+  }, [])
+
   return (
     <div className="header">
       <div className="headerLogo">
@@ -20,6 +31,7 @@ const Header = () => {
             className="headerSearchIcon"
           />
         </button>
+        <div className="headerAutoComplete">hello</div>
       </form>
     </div>
   )

@@ -60,3 +60,14 @@
 .headerLogo {
     cursor: pointer;
 }
+
+.headerAutoComplete {
+    position: absolute;
+    display: flex;
+    background-color: #ffffff;
+    width: 100%;
+    color: black;
+    padding: 2% 2.2%;
+    font-size: 1.2em;
+    border-bottom: 1px solid #00000085;
+}
