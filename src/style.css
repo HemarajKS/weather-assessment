@@ -17,7 +17,7 @@
 }
 
 body {
-    background-image: url('./assets/icons/background.png');
+    background-image: url('./assets/images/background.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -32,4 +32,8 @@ body {
     --blueGrey: #75889f;
     --purple: rgba(136, 81, 204, 0.68);
     --grey: rgba(255, 255, 255, 0.184);
+}
+
+.App {
+    min-height: 100vh;
 }
