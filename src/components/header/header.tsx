@@ -1,35 +1,52 @@
-import React, { useEffect, useState } from 'react'
-import './header.css'
-import { useSelector, useDispatch } from 'react-redux'
-import { getLocation } from '../../redux/reducers/locationAuto'
-import { getweather } from '../../redux/reducers/weatherSlice'
+import React, { useEffect, useState } from 'react';
+import './header.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { getLocation } from '../../redux/reducers/locationAuto';
+import { getweather } from '../../redux/reducers/weatherSlice';
 
 const Header = () => {
-  const [searchValue, setSearchValue] = useState('')
-  const [showAutoComplete, setShowAutoComplete] = useState(false)
+  const [searchValue, setSearchValue] = useState('');
+  const [showAutoComplete, setShowAutoComplete] = useState(false);
 
-  const dispatch = useDispatch()
-  const location = useSelector((state: any) => state.location)
-  const weather = useSelector((state: any) => state.weather)
-
-  // useEffect(() => {
-  //   dispatch(getLocation('udupi'))
-  // }, [])
+  const dispatch = useDispatch();
+  const location = useSelector((state: any) => state.location);
+  const weather = useSelector((state: any) => state.weather);
 
   const onChangeHandler = (searchString: string) => {
-    setSearchValue(searchString)
-    dispatch(getLocation(searchString))
-  }
+    setSearchValue(searchString);
+    dispatch(getLocation(searchString));
+  };
 
   useEffect(() => {
-    console.log('we', weather)
-  }, [weather])
+    console.log('weather', weather);
+    const data = weather &&
+      weather.data &&
+      weather.data.data && {
+        id: `${weather.data.data.location.lat},${weather.data.data.location.lon}`,
+        place: weather.data.data.location.name,
+        region: weather.data.data.location.region,
+        icon: `${weather.data.data.current.condition.icon}`,
+        temp_f: weather.data.data.current.temp_f,
+        temp_c: weather.data.data.current.temp_c,
+        condition: weather.data.data.current.condition.text,
+        temp_min: weather.data.data.current.temp_f - 2,
+        temp_max: weather.data.data.current.temp_f + 2,
+        precep: weather.data.data.current.precip_in,
+        humidity: weather.data.data.current.humidity,
+        wind: weather.data.data.current.wind_mph,
+        visibility: weather.data.data.current.vis_miles,
+        fav: false,
+      };
+
+    console.log('data', data);
+  }, [weather]);
 
   const submitHandler = (e: any) => {
-    e.preventDefault()
-    dispatch(getweather(e.target.search.value))
-    setShowAutoComplete(false)
-  }
+    e.preventDefault();
+    dispatch(getweather(e.target.search.value));
+    setShowAutoComplete(false);
+  };
+
   return (
     <div className="header">
       <div className="headerLogo">
@@ -42,11 +59,11 @@ const Header = () => {
           placeholder="Search city"
           value={searchValue}
           onChange={(e: any) => {
-            onChangeHandler(e.target.value)
+            onChangeHandler(e.target.value);
           }}
           name="search"
           onFocus={() => {
-            setShowAutoComplete(true)
+            setShowAutoComplete(true);
           }}
           autoComplete="off"
         />
@@ -65,24 +82,24 @@ const Header = () => {
             location.data.data.map(
               (
                 ele: { name: string; region: string; lat: number; lon: number },
-                i: number,
+                i: number
               ) => (
                 <div
                   key={i}
                   className="headerAutoCompleteItems"
                   onClick={() => {
-                    dispatch(getweather(`${ele.lat},${ele.lon}`))
-                    setShowAutoComplete(false)
+                    dispatch(getweather(`${ele.lat},${ele.lon}`));
+                    setShowAutoComplete(false);
                   }}
                 >
                   {ele.name}, {ele.region}
                 </div>
-              ),
+              )
             )}
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

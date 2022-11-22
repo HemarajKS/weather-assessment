@@ -8,7 +8,6 @@ const HomePage = () => {
   return (
     <div className="homePage">
       <div className="homePageBody">
-        <div className="homePageHeader"></div>
         <div className="homePageBodyContents"></div>
       </div>
       <Footer />
