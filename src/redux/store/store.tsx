@@ -1,5 +1,5 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import { currentDataSlice } from '../reducers/currentData';
+import searchSlice from '../reducers/currentData';
 import locationSlice from '../reducers/locationAuto';
 import recentSlice from '../reducers/recentSlice';
 import weatherSlice from '../reducers/weatherSlice';
@@ -8,7 +8,7 @@ export const store = configureStore({
   reducer: {
     location: locationSlice.reducer,
     weather: weatherSlice.reducer,
-    current: currentDataSlice.reducer,
+    search: searchSlice.reducer,
     recent: recentSlice.reducer,
   },
   middleware: getDefaultMiddleware({
