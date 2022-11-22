@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Switch from 'react-switch';
+import './homeDetails.css';
 
 const HomeDetails = () => {
   const [checked, setChecked] = useState(true);
@@ -21,7 +22,7 @@ const HomeDetails = () => {
         )}
         {weather && weather.search && (
           <>
-            {true ? (
+            {weather.search.fav ? (
               <div className="homePageFav">
                 <div className="homePageFavIcon">
                   <img
@@ -50,7 +51,11 @@ const HomeDetails = () => {
         {weather && weather.search && (
           <div className="homePageWeather">
             <div className="homePageWeatherIcon">
-              <img src={weather.search.icon} alt="Weather" />
+              <img
+                src={weather.search.icon}
+                alt="Weather"
+                className="homePageWeatherIcon"
+              />
             </div>
             <div className="homePageWeatherTemperature">
               <div className="homePageWeatherTemp">

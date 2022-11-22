@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getLocation } from '../../redux/reducers/locationAuto';
 import { getweather } from '../../redux/reducers/weatherSlice';
 import currentData, { currentSearch } from '../../redux/reducers/currentData';
+import { recentData } from '../../redux/reducers/recentSlice';
+import { getrecentData } from '../../redux/reducers/getRecentSlice';
 
 const Header = () => {
   const [searchValue, setSearchValue] = useState('');
@@ -12,40 +14,56 @@ const Header = () => {
   const dispatch = useDispatch();
   const location = useSelector((state: any) => state.location);
   const weather = useSelector((state: any) => state.weather);
+  const currData = useSelector((state: any) => state.search);
+  const getRecent = useSelector((state: any) => state.getrecent.data);
 
   const onChangeHandler = (searchString: string) => {
     setSearchValue(searchString);
     dispatch(getLocation(searchString));
   };
 
+  const data: any = weather &&
+    weather.data &&
+    weather.data.data && {
+      id: `${weather.data.data.location.lat},${weather.data.data.location.lon}`,
+      place: weather.data.data.location.name,
+      region: weather.data.data.location.region,
+      icon: `${weather.data.data.current.condition.icon}`,
+      temp_f: weather.data.data.current.temp_f,
+      temp_c: weather.data.data.current.temp_c,
+      condition: weather.data.data.current.condition.text,
+      temp_min: weather.data.data.current.temp_f - 2,
+      temp_max: weather.data.data.current.temp_f + 2,
+      precep: weather.data.data.current.precip_in,
+      humidity: weather.data.data.current.humidity,
+      wind: weather.data.data.current.wind_mph,
+      visibility: weather.data.data.current.vis_miles,
+      fav: false,
+    };
+
   useEffect(() => {
     console.log('weather', weather);
-    const data: any = weather &&
-      weather.data &&
-      weather.data.data && {
-        id: `${weather.data.data.location.lat},${weather.data.data.location.lon}`,
-        place: weather.data.data.location.name,
-        region: weather.data.data.location.region,
-        icon: `${weather.data.data.current.condition.icon}`,
-        temp_f: weather.data.data.current.temp_f,
-        temp_c: weather.data.data.current.temp_c,
-        condition: weather.data.data.current.condition.text,
-        temp_min: weather.data.data.current.temp_f - 2,
-        temp_max: weather.data.data.current.temp_f + 2,
-        precep: weather.data.data.current.precip_in,
-        humidity: weather.data.data.current.humidity,
-        wind: weather.data.data.current.wind_mph,
-        visibility: weather.data.data.current.vis_miles,
-        fav: false,
-      };
     console.log(data);
     data && dispatch(currentSearch(data));
+    dispatch(getrecentData());
+    addToRecentSearch();
   }, [weather]);
 
   const submitHandler = (e: any) => {
     e.preventDefault();
     dispatch(getweather(e.target.search.value));
     setShowAutoComplete(false);
+  };
+
+  const addToRecentSearch = () => {
+    data && dispatch(recentData(data));
+    console.log('get recent', getRecent);
+    const x =
+      getRecent &&
+      getRecent.data &&
+      Object.keys(getRecent.data).map((ele: any) => {
+        console.log(getRecent.data[ele].id, data.id);
+      });
   };
 
   return (

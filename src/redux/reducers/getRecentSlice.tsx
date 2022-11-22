@@ -8,14 +8,13 @@ const initialState = {
   loading: false,
 };
 
-export const recentData: any = createAsyncThunk(
-  'recent/recentData',
+export const getrecentData: any = createAsyncThunk(
+  'getrecent/getrecentData',
   async (arg: any, { rejectWithValue }: any) => {
     try {
       const fetchedData: any = await axios({
-        method: 'post',
+        method: 'get',
         url: 'https://weather-assessment-default-rtdb.firebaseio.com/recent.json',
-        data: arg,
       });
 
       return fetchedData;
@@ -25,22 +24,22 @@ export const recentData: any = createAsyncThunk(
   }
 );
 
-export const recentSlice = createSlice({
-  name: 'recent',
+export const getrecentSlice = createSlice({
+  name: 'getrecent',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     // Add reducers for additional action types here, and handle loading state as needed
-    builder.addCase(recentData.pending, (state, action) => {
+    builder.addCase(getrecentData.pending, (state, action) => {
       // Add user to the state array
       state.loading = true;
     });
-    builder.addCase(recentData.fulfilled, (state, action) => {
+    builder.addCase(getrecentData.fulfilled, (state, action) => {
       state.loading = false;
       state.data = action.payload;
       state.isSuccess = true;
     });
-    builder.addCase(recentData.rejected, (state, action) => {
+    builder.addCase(getrecentData.rejected, (state, action) => {
       state.message = action.payload;
       state.loading = false;
       state.isSuccess = false;
@@ -48,4 +47,4 @@ export const recentSlice = createSlice({
   },
 });
 
-export default recentSlice;
+export default getrecentSlice;
