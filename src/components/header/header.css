@@ -64,10 +64,14 @@
 .headerAutoComplete {
     position: absolute;
     display: flex;
+    flex-direction: column;
     background-color: #ffffff;
     width: 100%;
+}
+
+.headerAutoCompleteItems {
     color: black;
     padding: 2% 2.2%;
     font-size: 1.2em;
-    border-bottom: 1px solid #00000085;
+    border-bottom: 0.1px solid #00000085;
 }

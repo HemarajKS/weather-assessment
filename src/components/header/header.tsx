@@ -1,17 +1,27 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './header.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { getLocation } from '../../redux/reducers/locationAuto'
 
 const Header = () => {
+  const [searchValue, setSearchValue] = useState('')
+
   const dispatch = useDispatch()
   const location = useSelector((state: any) => state.location)
 
-  console.log('location Auto', location)
+  console.log('location Auto', location.data)
 
   useEffect(() => {
     dispatch(getLocation('udupi'))
   }, [])
+
+  const onChangeHandler = (searchString: string) => {
+    setSearchValue(searchString)
+  }
+
+  useEffect(() => {
+    console.log('search value', searchValue)
+  })
 
   return (
     <div className="header">
@@ -23,6 +33,9 @@ const Header = () => {
           type="text"
           className="headerSearchInput"
           placeholder="Search city"
+          onChange={(e: any) => {
+            onChangeHandler(e.target.value)
+          }}
         />
         <button className="headerSearchSubmit">
           <img
@@ -31,7 +44,16 @@ const Header = () => {
             className="headerSearchIcon"
           />
         </button>
-        <div className="headerAutoComplete">hello</div>
+        <div className="headerAutoComplete">
+          {location &&
+            location.data &&
+            location.data.data &&
+            location.data.data.map((ele: { name: string }, i: number) => (
+              <div key={i} className="headerAutoCompleteItems">
+                {ele.name}
+              </div>
+            ))}
+        </div>
       </form>
     </div>
   )
