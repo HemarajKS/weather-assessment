@@ -26,7 +26,9 @@ const Header = () => {
     console.log('we', weather)
   }, [weather])
 
-  const submitHandler = (e: any) => {}
+  const submitHandler = (e: any) => {
+    e.preventDefault()
+  }
   return (
     <div className="header">
       <div className="headerLogo">
@@ -42,11 +44,10 @@ const Header = () => {
             onChangeHandler(e.target.value)
           }}
           name="search"
-          onSubmit={(e: any) => {
-            submitHandler(e.target.search.value)
-          }}
+          onSubmit={submitHandler}
+          autoComplete="off"
         />
-        <button className="headerSearchSubmit">
+        <button className="headerSearchSubmit" type="submit">
           <img
             src={require('../../assets/icons/icon_search_white.png')}
             alt="Search"
@@ -59,14 +60,14 @@ const Header = () => {
             location.data.data &&
             location.data.data.map(
               (
-                ele: { name: string; region: string; lat: number; lng: number },
+                ele: { name: string; region: string; lat: number; lon: number },
                 i: number,
               ) => (
                 <div
                   key={i}
                   className="headerAutoCompleteItems"
                   onClick={() => {
-                    dispatch(getweather(`${ele.lat},${ele.lng}`))
+                    dispatch(getweather(`${ele.lat},${ele.lon}`))
                   }}
                 >
                   {ele.name}, {ele.region}
