@@ -7,7 +7,7 @@ import currentData, { currentSearch } from '../../redux/reducers/currentData'
 import { recentData } from '../../redux/reducers/recentSlice'
 import { getrecentData } from '../../redux/reducers/getRecentSlice'
 import { getFavouriteData } from '../../redux/reducers/getFavSlice'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 
 const Header = () => {
   const [searchValue, setSearchValue] = useState('')
@@ -22,6 +22,10 @@ const Header = () => {
   const currData = useSelector((state: any) => state.search)
   const getRecent = useSelector((state: any) => state.getrecent.data)
   const fav = useSelector((state: any) => state.getFavourite.data)
+
+  const currPath = useLocation()
+
+  console.log('location', currPath)
 
   const onChangeHandler = (searchString: string) => {
     setSearchValue(searchString)
@@ -83,6 +87,7 @@ const Header = () => {
         <img
           src={require('../../assets/icons/icon_menu_white.png')}
           alt="menu"
+          className={currPath.pathname !== '/' ? 'invertImage' : ''}
         />
       </div>
       <div className="headerLogo">
@@ -158,6 +163,7 @@ const Header = () => {
         <img
           src={require('../../assets/icons/icon_search_white.png')}
           alt="menu"
+          className={currPath.pathname !== '/' ? 'invertImage' : ''}
         />
       </div>
       <aside

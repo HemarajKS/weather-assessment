@@ -101,6 +101,9 @@ img.mobileBack {
     .showHeaderSearchForm {
         transform: translateY(0) !important;
     }
+    .invertImage {
+        filter: invert(1);
+    }
     .menuIcon {
         display: block;
         padding-right: 2em;
