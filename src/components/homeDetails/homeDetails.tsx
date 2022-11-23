@@ -35,17 +35,19 @@ const HomeDetails = () => {
 
   const whetherLiked = () => {
     for (var i = 0; i < Object.keys(fav.data).length; i++) {
-      console.log(fav.data[Object.keys(fav.data)[i]].id, weather.search.id)
       if (fav.data[Object.keys(fav.data)[i]].id === weather.search.id) {
         setfavExist(true)
-        console.log('current key', Object.keys(fav.data)[i])
+
         return
       } else {
         setfavExist(false)
       }
     }
-    dispatch(getFavouriteData())
   }
+
+  useEffect(() => {
+    dispatch(getFavouriteData())
+  }, [favExist, dispatch])
   return (
     <div className="homeBodyContainer">
       <div className="HomePage">

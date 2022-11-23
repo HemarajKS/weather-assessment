@@ -6,6 +6,7 @@ import { getweather } from '../../redux/reducers/weatherSlice'
 import currentData, { currentSearch } from '../../redux/reducers/currentData'
 import { recentData } from '../../redux/reducers/recentSlice'
 import { getrecentData } from '../../redux/reducers/getRecentSlice'
+import { getFavouriteData } from '../../redux/reducers/getFavSlice'
 
 const Header = () => {
   const [searchValue, setSearchValue] = useState('')
@@ -17,6 +18,7 @@ const Header = () => {
   const weather = useSelector((state: any) => state.weather)
   const currData = useSelector((state: any) => state.search)
   const getRecent = useSelector((state: any) => state.getrecent.data)
+  const fav = useSelector((state: any) => state.getFavourite.data)
 
   const onChangeHandler = (searchString: string) => {
     setSearchValue(searchString)
@@ -24,8 +26,12 @@ const Header = () => {
   }
 
   useEffect(() => {
-    console.log('current Data', currData.search)
+    dispatch(getFavouriteData())
   }, [currData])
+
+  useEffect(() => {
+    console.log('current Data', currData.search, fav.data)
+  })
 
   const data: any = weather &&
     weather.data &&
