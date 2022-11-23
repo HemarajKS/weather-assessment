@@ -1,65 +1,67 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import Switch from 'react-switch'
-import { FavouriteData } from '../../redux/reducers/favouriteSlice'
-import { getFavouriteData } from '../../redux/reducers/getFavSlice'
-import './homeDetails.css'
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import Switch from 'react-switch';
+import { deleteData } from '../../redux/reducers/deleteSlice';
+import { FavouriteData } from '../../redux/reducers/favouriteSlice';
+import { getFavouriteData } from '../../redux/reducers/getFavSlice';
+import './homeDetails.css';
 
 const HomeDetails = () => {
   useEffect(() => {
-    dispatch(getFavouriteData())
-  }, [])
+    dispatch(getFavouriteData());
+  }, []);
 
-  const dispatch = useDispatch()
-  const [checked, setChecked] = useState(true)
-  const [favExist, setfavExist] = useState(false)
-  const weather: any = useSelector((state: any) => state.search)
-  const fav: any = useSelector((state: any) => state.getFavourite.data)
+  const dispatch = useDispatch();
+  const [checked, setChecked] = useState(true);
+  const [favExist, setfavExist] = useState(false);
+  const [currentkey, setcurrentkey] = useState('');
+  const weather: any = useSelector((state: any) => state.search);
+  const fav: any = useSelector((state: any) => state.getFavourite.data);
 
   useEffect(() => {
-    dispatch(getFavouriteData())
-  }, [weather])
+    dispatch(getFavouriteData());
+  }, [weather]);
 
   const handleChange = (nextChecked: boolean) => {
-    setChecked(nextChecked)
-  }
+    setChecked(nextChecked);
+  };
 
   useEffect(() => {
     console.log(
       'searched',
       weather && weather.search && weather.search.id,
-      fav && fav.data && fav.data,
-    )
-    fav && fav.data && whetherLiked()
-  }, [weather && weather.search && weather, fav && fav.data])
+      fav && fav.data && fav.data
+    );
+    fav && fav.data && whetherLiked();
+  }, [weather && weather.search && weather, fav && fav.data]);
 
   const whetherLiked = () => {
     for (var i = 0; i < Object.keys(fav.data).length; i++) {
       if (fav.data[Object.keys(fav.data)[i]].id === weather.search.id) {
-        setfavExist(true)
+        setfavExist(true);
 
-        return
+        return;
       } else {
-        setfavExist(false)
+        setfavExist(false);
       }
     }
-  }
+  };
 
   useEffect(() => {
-    dispatch(getFavouriteData())
-  }, [favExist, dispatch])
+    dispatch(getFavouriteData());
+  }, [favExist, dispatch]);
 
-  const [date, setDate] = useState(new Date())
+  const [date, setDate] = useState(new Date());
 
   function refreshClock() {
-    setDate(new Date())
+    setDate(new Date());
   }
   useEffect(() => {
-    const timerId = setInterval(refreshClock, 1000)
+    const timerId = setInterval(refreshClock, 1000);
     return function cleanup() {
-      clearInterval(timerId)
-    }
-  }, [])
+      clearInterval(timerId);
+    };
+  }, []);
   return (
     <div className="homeBodyContainer">
       <div className="HomePage">
@@ -94,21 +96,27 @@ const HomeDetails = () => {
               <div
                 className="homePageFav"
                 onClick={() => {
-                  console.log('remove', weather.search, fav.data)
-                  console.log('removeee', Object.keys(fav.data))
+                  console.log('remove', weather.search, fav.data);
+                  console.log('removeee', Object.keys(fav.data));
                   for (var i = 0; i < Object.keys(fav.data).length; i++) {
                     console.log(
                       fav.data[Object.keys(fav.data)[i]].id,
-                      weather.search.id,
-                    )
+                      weather.search.id
+                    );
                     if (
                       fav.data[Object.keys(fav.data)[i]].id ===
                       weather.search.id
                     ) {
-                      alert('exist')
-                      setfavExist(false)
-                      console.log('current key', Object.keys(fav.data)[i])
-                      return
+                      alert('exist');
+                      setfavExist(false);
+                      console.log('current key', Object.keys(fav.data)[i]);
+                      dispatch(
+                        deleteData({
+                          page: 'Favourite',
+                          id: Object.keys(fav.data)[i],
+                        })
+                      );
+                      return;
                     }
                   }
                 }}
@@ -128,26 +136,26 @@ const HomeDetails = () => {
               <div
                 className="homePageFav"
                 onClick={() => {
-                  let arr: any = []
-                  dispatch(FavouriteData(weather.search))
-                  console.log('remove', weather.search, fav.data)
-                  console.log('removeee', Object.keys(fav.data))
+                  let arr: any = [];
+                  dispatch(FavouriteData(weather.search));
+                  console.log('remove', weather.search, fav.data);
+                  console.log('removeee', Object.keys(fav.data));
                   for (var i = 0; i < Object.keys(fav.data).length; i++) {
                     console.log(
                       fav.data[Object.keys(fav.data)[i]].id,
-                      weather.search.id,
-                    )
+                      weather.search.id
+                    );
                     if (
                       fav.data[Object.keys(fav.data)[i]].id ===
                       weather.search.id
                     ) {
-                      arr.push('exist')
-                      setfavExist(true)
-                      return
+                      arr.push('exist');
+                      setfavExist(true);
+                      return;
                     }
                   }
                   if (arr.includes('exist')) {
-                    alert('array already exists')
+                    alert();
                   } else {
                   }
                 }}
@@ -256,7 +264,7 @@ const HomeDetails = () => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default HomeDetails
+export default HomeDetails;
