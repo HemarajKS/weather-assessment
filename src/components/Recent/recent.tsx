@@ -75,7 +75,9 @@ const Recent = () => {
                 .map((key: any, i: any) => {
                   return (
                     <div className="favouritesBody" key={i}>
-                      <div className="favPlace">{recent.data[key].place}</div>
+                      <div className="favPlace">
+                        {recent.data[key].place}, {recent.data[key].region}
+                      </div>
                       <div className="favIcon">
                         <img src={recent.data[key].icon} alt="sunny" />
                       </div>
