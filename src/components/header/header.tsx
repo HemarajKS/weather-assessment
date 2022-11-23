@@ -24,7 +24,7 @@ const Header = () => {
   }
 
   useEffect(() => {
-    console.log('current Data', currData)
+    console.log('current Data', currData.search)
   }, [currData])
 
   const data: any = weather &&

@@ -16,6 +16,10 @@ const HomeDetails = () => {
   const weather: any = useSelector((state: any) => state.search)
   const fav: any = useSelector((state: any) => state.getFavourite.data)
 
+  useEffect(() => {
+    dispatch(getFavouriteData())
+  }, [weather])
+
   const handleChange = (nextChecked: boolean) => {
     setChecked(nextChecked)
   }
@@ -26,18 +30,21 @@ const HomeDetails = () => {
       weather && weather.search && weather.search.id,
       fav && fav.data && fav.data,
     )
+    fav && fav.data && whetherLiked()
+  }, [weather && weather.search && weather, fav && fav.data])
+
+  const whetherLiked = () => {
     for (var i = 0; i < Object.keys(fav.data).length; i++) {
       console.log(fav.data[Object.keys(fav.data)[i]].id, weather.search.id)
       if (fav.data[Object.keys(fav.data)[i]].id === weather.search.id) {
-        alert('exist')
         setfavExist(true)
         console.log('current key', Object.keys(fav.data)[i])
         return
       } else {
-        console.log('current key', Object.keys(fav.data)[i])
+        setfavExist(false)
       }
     }
-  }, [weather, fav])
+  }
   return (
     <div className="homeBodyContainer">
       <div className="HomePage">
