@@ -29,10 +29,6 @@ const Header = () => {
     dispatch(getFavouriteData())
   }, [currData])
 
-  useEffect(() => {
-    console.log('current Data', currData.search, fav.data)
-  })
-
   const data: any = weather &&
     weather.data &&
     weather.data.data && {
@@ -65,7 +61,7 @@ const Header = () => {
   }
 
   useEffect(() => {
-    console.log('current', currData.search, getRecent.data)
+    console.log('current', currData.search, fav)
     // dispatch(recentData(currData.search))
     setSubmit(false)
     dispatch(getrecentData())
