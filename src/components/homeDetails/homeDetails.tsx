@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Switch from 'react-switch'
+import { FavouriteData } from '../../redux/reducers/favouriteSlice'
 import './homeDetails.css'
 
 const HomeDetails = () => {
+  const dispatch = useDispatch()
   const [checked, setChecked] = useState(true)
   const weather: any = useSelector((state: any) => state.search)
 
@@ -36,7 +38,12 @@ const HomeDetails = () => {
                 </div>
               </div>
             ) : (
-              <div className="homePageFav">
+              <div
+                className="homePageFav"
+                onClick={() => {
+                  dispatch(FavouriteData(weather.search))
+                }}
+              >
                 <div className="homePageFavIcon">
                   <img
                     src={require(`../../assets/icons/icon_favourite.png`)}
