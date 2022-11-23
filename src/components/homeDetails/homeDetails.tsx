@@ -37,7 +37,7 @@ const HomeDetails = () => {
                   console.log('remove', weather.search, fav.data)
                   console.log('removeee', Object.keys(fav.data))
                   for (var i = 0; i < Object.keys(fav.data).length; i++) {
-                    console.log(Object.keys(fav.data)[i])
+                    console.log(fav.data[Object.keys(fav.data)[i]].id)
                   }
                 }}
               >
