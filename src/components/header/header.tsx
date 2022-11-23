@@ -42,11 +42,8 @@ const Header = () => {
     };
 
   useEffect(() => {
-    console.log('weather', weather);
-    console.log(data);
     data && dispatch(currentSearch(data));
     dispatch(getrecentData());
-    addToRecentSearch();
   }, [weather]);
 
   const submitHandler = (e: any) => {
@@ -55,28 +52,12 @@ const Header = () => {
     setShowAutoComplete(false);
   };
 
-  const addToRecentSearch = () => {
-    console.log('get recent', getRecent);
-    let arr: any = [];
-    data &&
-      data.id &&
-      getRecent &&
-      getRecent.data &&
-      Object.keys(getRecent.data).map((ele: any) => {
-        console.log(getRecent.data[ele].id, data.id);
-        if (getRecent.data[ele].id !== data.id) {
-          return arr.push('not equal');
-        }
-        return arr.push('equal');
-      });
+  useEffect(() => {
+    console.log('recent data', getRecent.data);
+    dispatch(recentData(currData.search));
+  }, [currData, getRecent]);
 
-    console.log('arr', arr);
-
-    if (!arr.includes('equal')) {
-      data && dispatch(recentData(data));
-    } else {
-    }
-  };
+  useEffect(() => {}, [getRecent]);
 
   return (
     <div className="header">
