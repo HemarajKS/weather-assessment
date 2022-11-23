@@ -24,8 +24,13 @@ const HomeDetails = () => {
         )}
         {weather && weather.search && (
           <>
-            {weather.search.fav ? (
-              <div className="homePageFav">
+            {!weather.search.fav ? (
+              <div
+                className="homePageFav"
+                onClick={() => {
+                  alert('data to be removed' + weather.search.id)
+                }}
+              >
                 <div className="homePageFavIcon">
                   <img
                     src={require('../../assets/icons/icon_favourite_Active.png')}
