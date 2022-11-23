@@ -13,6 +13,10 @@ const Recent = () => {
 
   const recent: any = useSelector((state: any) => state.getrecent.data)
 
+  useEffect(() => {
+    dispatch(getrecentData())
+  }, [recent])
+
   const [modalIsOpen, setIsOpen] = React.useState(false)
 
   function openModal() {
@@ -30,7 +34,7 @@ const Recent = () => {
       if (recent.data.hasOwnProperty(key)) {
         console.log(key)
         dispatch(deleteData({ page: 'recent', id: key }))
-
+        dispatch(getrecentData())
         closeModal()
       }
     }
