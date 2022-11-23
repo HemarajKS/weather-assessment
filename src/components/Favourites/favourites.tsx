@@ -47,8 +47,6 @@ const Favourites = () => {
     dispatch(getFavouriteData())
   }
 
-  console.log('fav', fav && fav.data)
-
   return (
     <>
       {fav && fav.data && Object.keys(fav.data).length > 0 ? (
@@ -69,7 +67,6 @@ const Favourites = () => {
             fav.data &&
             Object.keys(fav.data).length > 0 &&
             Object.keys(fav.data).map((key: any, i: any) => {
-              console.log('icon', fav.data[key].icon && fav.data[key].icon)
               return (
                 <div className="favouritesBody" key={i}>
                   <div className="favPlace">

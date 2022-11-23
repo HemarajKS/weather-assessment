@@ -7,7 +7,11 @@ import { getrecentData } from '../../redux/reducers/getRecentSlice'
 const Recent = () => {
   const dispatch = useDispatch()
 
-  const recent = useSelector((state: any) => state.getrecent.data)
+  useEffect(() => {
+    dispatch(getrecentData())
+  }, [])
+
+  const recent: any = useSelector((state: any) => state.getrecent.data)
 
   const [modalIsOpen, setIsOpen] = React.useState(false)
 
@@ -19,12 +23,14 @@ const Recent = () => {
     setIsOpen(false)
   }
 
+  console.log('res', recent.data)
+
   const deleteAll = () => {
     for (var key in recent.data) {
       if (recent.data.hasOwnProperty(key)) {
         console.log(key)
         dispatch(deleteData({ page: 'recent', id: key }))
-        dispatch(getrecentData())
+
         closeModal()
       }
     }
