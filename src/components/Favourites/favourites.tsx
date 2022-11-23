@@ -1,55 +1,55 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import '../../components/Favourites/favpourites.css'
-import Modal from 'react-modal'
-import { getFavouriteData } from '../../redux/reducers/getFavSlice'
-import { deleteData } from '../../redux/reducers/deleteSlice'
-import { useLocation } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import '../../components/Favourites/favpourites.css';
+import Modal from 'react-modal';
+import { getFavouriteData } from '../../redux/reducers/getFavSlice';
+import { deleteData } from '../../redux/reducers/deleteSlice';
+import { useLocation } from 'react-router-dom';
 
 const Favourites = () => {
-  const dispatch = useDispatch()
-  const location = useLocation()
+  const dispatch = useDispatch();
+  const location = useLocation();
 
-  console.log('location', location)
-
-  useEffect(() => {
-    dispatch(getFavouriteData())
-  }, [])
-
-  const fav = useSelector((state: any) => state.getFavourite.data)
-  const del = useSelector((state: any) => state.delete.isSuccess)
+  console.log('location', location);
 
   useEffect(() => {
-    dispatch(getFavouriteData())
-  }, [del])
+    dispatch(getFavouriteData());
+  }, []);
+
+  const fav = useSelector((state: any) => state.getFavourite.data);
+  const del = useSelector((state: any) => state.delete.isSuccess);
+
+  useEffect(() => {
+    dispatch(getFavouriteData());
+  }, [del]);
 
   const deleteAll = () => {
     // closeModal()
 
     for (var key in fav.data) {
       if (fav.data.hasOwnProperty(key)) {
-        console.log('keys', key)
-        dispatch(deleteData({ page: 'Favourite', id: key }))
-        dispatch(getFavouriteData())
-        closeModal()
+        console.log('keys', key);
+        dispatch(deleteData({ page: 'Favourite', id: key }));
+        dispatch(getFavouriteData());
+        closeModal();
       }
     }
-  }
+  };
 
-  const [modalIsOpen, setIsOpen] = useState(false)
+  const [modalIsOpen, setIsOpen] = useState(false);
 
   function openModal() {
-    setIsOpen(true)
+    setIsOpen(true);
   }
 
   function closeModal() {
-    setIsOpen(false)
+    setIsOpen(false);
   }
 
   const deleteFav = (delId: any) => {
-    dispatch(deleteData({ page: 'Favourite', id: delId }))
-    dispatch(getFavouriteData())
-  }
+    dispatch(deleteData({ page: 'Favourite', id: delId }));
+    dispatch(getFavouriteData());
+  };
 
   return (
     <>
@@ -74,24 +74,29 @@ const Favourites = () => {
             Object.keys(fav.data).map((key: any, i: any) => {
               return (
                 <div className="favouritesBody" key={i}>
-                  <div className="favPlace">
-                    {fav.data[key].place && fav.data[key].place},{' '}
-                    {fav.data[key].region && fav.data[key].region}
-                  </div>
-                  <div className="favIcon">
-                    <img src={fav.data[key].icon} alt="sunny" />
-                  </div>
-                  <div className="favTemp">
-                    {fav.data[key].temp_c && fav.data[key].temp_c.toFixed(0)}{' '}
-                    <span>{'\u00B0'}C</span>
-                  </div>
-                  <div className="favCond">
-                    {fav.data[key].condition && fav.data[key].condition}
+                  <div className="favouritesBodyDown">
+                    <div className="favPlace">
+                      {fav.data[key].place && fav.data[key].place},{' '}
+                      {fav.data[key].region && fav.data[key].region}
+                    </div>
+                    <div className="favouritebodyDownLower">
+                      <div className="favIcon">
+                        <img src={fav.data[key].icon} alt="sunny" />
+                      </div>
+                      <div className="favTemp">
+                        {fav.data[key].temp_c &&
+                          fav.data[key].temp_c.toFixed(0)}{' '}
+                        <span>{'\u00B0'}C</span>
+                      </div>
+                      <div className="favCond">
+                        {fav.data[key].condition && fav.data[key].condition}
+                      </div>
+                    </div>
                   </div>
                   <div
                     className="favLike"
                     onClick={() => {
-                      deleteFav(key)
+                      deleteFav(key);
                     }}
                   >
                     <img
@@ -100,7 +105,7 @@ const Favourites = () => {
                     />
                   </div>
                 </div>
-              )
+              );
             })}
         </div>
       ) : (
@@ -133,7 +138,7 @@ const Favourites = () => {
         </div>
       </Modal>
     </>
-  )
-}
+  );
+};
 
-export default Favourites
+export default Favourites;
