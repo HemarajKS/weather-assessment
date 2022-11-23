@@ -7,11 +7,14 @@ import currentData, { currentSearch } from '../../redux/reducers/currentData'
 import { recentData } from '../../redux/reducers/recentSlice'
 import { getrecentData } from '../../redux/reducers/getRecentSlice'
 import { getFavouriteData } from '../../redux/reducers/getFavSlice'
+import { NavLink } from 'react-router-dom'
 
 const Header = () => {
   const [searchValue, setSearchValue] = useState('')
   const [showAutoComplete, setShowAutoComplete] = useState(false)
   const [Submit, setSubmit] = useState(false)
+  const [mobilesearch, setMobileSearch] = useState(false)
+  const [showMobileMenu, setShowMobileMenu] = useState(false)
 
   const dispatch = useDispatch()
   const location = useSelector((state: any) => state.location)
@@ -62,7 +65,7 @@ const Header = () => {
 
   useEffect(() => {
     console.log('current', currData.search, fav)
-    // dispatch(recentData(currData.search))
+    dispatch(recentData(currData.search))
     setSubmit(false)
     dispatch(getrecentData())
   }, [currData])
@@ -71,10 +74,26 @@ const Header = () => {
 
   return (
     <div className="header">
+      <div
+        className="menuIcon"
+        onClick={() => {
+          setShowMobileMenu(true)
+        }}
+      >
+        <img
+          src={require('../../assets/icons/icon_menu_white.png')}
+          alt="menu"
+        />
+      </div>
       <div className="headerLogo">
         <img src={require('../../assets/images/logo_web.png')} alt="Logo" />
       </div>
-      <form className="headerSearch" onSubmit={submitHandler}>
+      <form
+        className={
+          mobilesearch ? 'headerSearch showHeaderSearchForm' : 'headerSearch'
+        }
+        onSubmit={submitHandler}
+      >
         <input
           type="text"
           className="headerSearchInput"
@@ -96,6 +115,14 @@ const Header = () => {
             className="headerSearchIcon"
           />
         </button>
+        <img
+          src={require('../../assets/icons/icon_back_black.png')}
+          alt="back"
+          className="mobileBack"
+          onClick={() => {
+            setMobileSearch(false)
+          }}
+        />
         <div className="headerAutoComplete">
           {showAutoComplete &&
             location &&
@@ -121,6 +148,54 @@ const Header = () => {
             )}
         </div>
       </form>
+      <div
+        className="mobileSearchIcon"
+        onClick={() => {
+          setMobileSearch(!mobilesearch)
+        }}
+      >
+        {' '}
+        <img
+          src={require('../../assets/icons/icon_search_white.png')}
+          alt="menu"
+        />
+      </div>
+      <aside
+        className={!showMobileMenu ? 'mobileMenu hideMobileMenu' : 'mobileMenu'}
+      >
+        <div className="mobileMenuLinks">
+          <div className="mobileMenuLinksTabs">
+            <NavLink
+              to="/"
+              onClick={() => {
+                setShowMobileMenu(false)
+              }}
+            >
+              Home
+            </NavLink>
+          </div>
+          <div className="mobileMenuLinksTabs">
+            <NavLink
+              to="/favourites"
+              onClick={() => {
+                setShowMobileMenu(false)
+              }}
+            >
+              Favourite
+            </NavLink>
+          </div>
+          <div className="mobileMenuLinksTabs">
+            <NavLink
+              to="/recent"
+              onClick={() => {
+                setShowMobileMenu(false)
+              }}
+            >
+              Recent Search
+            </NavLink>
+          </div>
+        </div>
+      </aside>
     </div>
   )
 }

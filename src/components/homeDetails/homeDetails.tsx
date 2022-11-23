@@ -96,6 +96,7 @@ const HomeDetails = () => {
               <div
                 className="homePageFav"
                 onClick={() => {
+                  let arr: any = []
                   dispatch(FavouriteData(weather.search))
                   console.log('remove', weather.search, fav.data)
                   console.log('removeee', Object.keys(fav.data))
@@ -108,10 +109,14 @@ const HomeDetails = () => {
                       fav.data[Object.keys(fav.data)[i]].id ===
                       weather.search.id
                     ) {
-                      alert('exist')
+                      arr.push('exist')
                       setfavExist(true)
                       return
                     }
+                  }
+                  if (arr.includes('exist')) {
+                    alert('array already exists')
+                  } else {
                   }
                 }}
               >

@@ -77,3 +77,101 @@
     border-bottom: 0.1px solid #00000030;
     cursor: pointer;
 }
+
+.menuIcon {
+    display: none;
+}
+
+.mobileSearchIcon {
+    display: none;
+}
+
+.mobileMenu {
+    display: none;
+}
+
+img.mobileBack {
+    display: none;
+}
+
+@media screen and (max-width: 774px) {
+    .headerSearch {
+        transform: translateY(-9999px);
+    }
+    .showHeaderSearchForm {
+        transform: translateY(0) !important;
+    }
+    .menuIcon {
+        display: block;
+        padding-right: 2em;
+        cursor: pointer;
+    }
+    .mobileSearchIcon {
+        display: block;
+        padding-right: 1em;
+    }
+    .mobileMenu {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 20%;
+        z-index: 10;
+        background-color: white;
+        padding: 10% 0 0 10%;
+        animation-name: sideBar;
+        animation-duration: 0.5s;
+    }
+    .mobileMenuLinksTabs a {
+        color: #707070 !important;
+        text-decoration: none;
+        font-size: 150%;
+    }
+    .mobileMenuLinksTabs {
+        padding: 3% 0;
+    }
+    .mobileMenuLinksTabs .active {
+        color: #000000 !important;
+    }
+    .hideMobileMenu {
+        display: none !important;
+    }
+    button.headerSearchButton {
+        display: none;
+    }
+    .headerSearchInput {
+        background-color: white;
+        border-radius: 0;
+        height: 3.5em;
+        padding-left: 70px;
+        color: black;
+        box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.507);
+    }
+    .headerSearch {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        height: auto;
+        max-width: initial;
+        z-index: 10;
+    }
+    img.mobileBack {
+        display: block;
+        position: relative;
+        z-index: 35;
+        top: -46px;
+        left: 21px;
+        opacity: 0.8;
+        cursor: pointer;
+    }
+    @keyframes sideBar {
+        from {
+            transform: translateX(-100%);
+        }
+        to {
+            transform: translateX(0);
+        }
+    }
+}
