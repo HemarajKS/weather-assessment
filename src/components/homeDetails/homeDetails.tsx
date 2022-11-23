@@ -2,12 +2,18 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Switch from 'react-switch'
 import { FavouriteData } from '../../redux/reducers/favouriteSlice'
+import { getFavouriteData } from '../../redux/reducers/getFavSlice'
 import './homeDetails.css'
 
 const HomeDetails = () => {
+  useEffect(() => {
+    dispatch(getFavouriteData())
+  }, [])
+
   const dispatch = useDispatch()
   const [checked, setChecked] = useState(true)
   const weather: any = useSelector((state: any) => state.search)
+  const fav: any = useSelector((state: any) => state.getFavourite.data)
 
   const handleChange = (nextChecked: boolean) => {
     setChecked(nextChecked)
@@ -28,7 +34,11 @@ const HomeDetails = () => {
               <div
                 className="homePageFav"
                 onClick={() => {
-                  alert('data to be removed' + weather.search.id)
+                  console.log('remove', weather.search, fav.data)
+                  console.log('removeee', Object.keys(fav.data))
+                  for (var i = 0; i < Object.keys(fav.data).length; i++) {
+                    console.log(Object.keys(fav.data)[i])
+                  }
                 }}
               >
                 <div className="homePageFavIcon">
