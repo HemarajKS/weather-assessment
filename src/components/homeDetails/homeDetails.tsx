@@ -48,9 +48,41 @@ const HomeDetails = () => {
   useEffect(() => {
     dispatch(getFavouriteData())
   }, [favExist, dispatch])
+
+  const [date, setDate] = useState(new Date())
+
+  function refreshClock() {
+    setDate(new Date())
+  }
+  useEffect(() => {
+    const timerId = setInterval(refreshClock, 1000)
+    return function cleanup() {
+      clearInterval(timerId)
+    }
+  }, [])
   return (
     <div className="homeBodyContainer">
       <div className="HomePage">
+        <div className="HomePagebodyTabTime">
+          {' '}
+          <span>
+            {' '}
+            {date.toLocaleString('en-us', {
+              weekday: 'short',
+            })}
+            , {date.getDate()}{' '}
+            {date.toLocaleString('en-us', {
+              month: 'short',
+            })}{' '}
+            {date.getFullYear()}
+            &nbsp;&nbsp;&nbsp;
+            {date.toLocaleString('en-US', {
+              hour: 'numeric',
+              minute: 'numeric',
+              hour12: true,
+            })}
+          </span>
+        </div>
         {weather && weather.search && (
           <div className="homePagePlace">
             {weather.search.place + ' , ' + weather.search.region}

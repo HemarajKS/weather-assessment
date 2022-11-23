@@ -4,8 +4,12 @@ import Modal from 'react-modal'
 import './recent.css'
 import { deleteData } from '../../redux/reducers/deleteSlice'
 import { getrecentData } from '../../redux/reducers/getRecentSlice'
+import { useLocation } from 'react-router-dom'
 const Recent = () => {
   const dispatch = useDispatch()
+  const location = useLocation()
+
+  console.log('location', location)
 
   useEffect(() => {
     dispatch(getrecentData())
@@ -68,6 +72,7 @@ const Recent = () => {
   // }, [favData])
   return (
     <>
+      <div className="mobileHeader">Recent Search</div>
       {recent && recent.data && recent.data ? (
         <>
           <div className="favourites">

@@ -105,10 +105,12 @@ img.mobileBack {
         display: block;
         padding-right: 2em;
         cursor: pointer;
+        z-index: 100;
     }
     .mobileSearchIcon {
         display: block;
         padding-right: 1em;
+        z-index: 100;
     }
     .mobileMenu {
         display: block;

@@ -4,9 +4,13 @@ import '../../components/Favourites/favpourites.css'
 import Modal from 'react-modal'
 import { getFavouriteData } from '../../redux/reducers/getFavSlice'
 import { deleteData } from '../../redux/reducers/deleteSlice'
+import { useLocation } from 'react-router-dom'
 
 const Favourites = () => {
   const dispatch = useDispatch()
+  const location = useLocation()
+
+  console.log('location', location)
 
   useEffect(() => {
     dispatch(getFavouriteData())
@@ -49,6 +53,7 @@ const Favourites = () => {
 
   return (
     <>
+      <div className="mobileHeader">Favourite</div>
       {fav && fav.data && Object.keys(fav.data).length > 0 ? (
         <div className="favourites">
           <div className="favouritesHeader">

@@ -44,8 +44,7 @@
         display: none;
     }
     .bodyTabHeader {
-        border-bottom: none;
-        justify-content: center;
+        display: none;
     }
     .body {
         width: 100%;
