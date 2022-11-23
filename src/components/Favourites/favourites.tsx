@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import '../../components/Favourites/favpourites.css'
 import Modal from 'react-modal'
 import { getFavouriteData } from '../../redux/reducers/getFavSlice'
+import { deleteData } from '../../redux/reducers/deleteSlice'
 
 const Favourites = () => {
   const dispatch = useDispatch()
@@ -16,10 +17,10 @@ const Favourites = () => {
   const deleteAll = () => {
     // closeModal()
 
-    for (var key in fav.data.data) {
-      if (fav.data.data.hasOwnProperty(key)) {
-        console.log(key)
-
+    for (var key in fav.data) {
+      if (fav.data.hasOwnProperty(key)) {
+        console.log('keys', key)
+        dispatch(deleteData({ page: 'Favourite', id: key }))
         dispatch(getFavouriteData())
         closeModal()
       }
@@ -71,7 +72,7 @@ const Favourites = () => {
                     <img src={fav.data[key].icon} alt="sunny" />
                   </div>
                   <div className="favTemp">
-                    {fav.data[key].temp_f && fav.data[key].temp_f}{' '}
+                    {fav.data[key].temp_c && fav.data[key].temp_c.toFixed(0)}{' '}
                     <span>{'\u00B0'}C</span>
                   </div>
                   <div className="favCond">

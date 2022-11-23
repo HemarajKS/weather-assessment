@@ -1,31 +1,31 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import Modal from 'react-modal';
-import './recent.css';
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import Modal from 'react-modal'
+import './recent.css'
 const Recent = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const recent = useSelector((state: any) => state.getrecent.data);
+  const recent = useSelector((state: any) => state.getrecent.data)
 
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [modalIsOpen, setIsOpen] = React.useState(false)
 
   function openModal() {
-    setIsOpen(true);
+    setIsOpen(true)
   }
 
   function closeModal() {
-    setIsOpen(false);
+    setIsOpen(false)
   }
 
   const deleteAll = () => {
     for (var key in recent.data) {
       if (recent.data.hasOwnProperty(key)) {
-        console.log(key);
+        console.log(key)
 
-        closeModal();
+        closeModal()
       }
     }
-  };
+  }
 
   // recent &&
   //   recent.data &&
@@ -82,7 +82,7 @@ const Recent = () => {
                         <img src={recent.data[key].icon} alt="sunny" />
                       </div>
                       <div className="favTemp">
-                        {recent.data[key].temp_f.toFixed(0)}{' '}
+                        {recent.data[key].temp_c.toFixed(0)}{' '}
                         <span>{'\u00B0'}C</span>
                       </div>
                       <div className="favCond">
@@ -110,7 +110,7 @@ const Recent = () => {
                         )}
                       </div>
                     </div>
-                  );
+                  )
                 })}
           </div>
           <Modal
@@ -143,7 +143,7 @@ const Recent = () => {
         </div>
       )}
     </>
-  );
-};
+  )
+}
 
-export default Recent;
+export default Recent
