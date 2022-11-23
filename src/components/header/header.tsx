@@ -1,40 +1,40 @@
-import React, { useEffect, useState } from 'react'
-import './header.css'
-import { useSelector, useDispatch } from 'react-redux'
-import { getLocation } from '../../redux/reducers/locationAuto'
-import { getweather } from '../../redux/reducers/weatherSlice'
-import currentData, { currentSearch } from '../../redux/reducers/currentData'
-import { recentData } from '../../redux/reducers/recentSlice'
-import { getrecentData } from '../../redux/reducers/getRecentSlice'
-import { getFavouriteData } from '../../redux/reducers/getFavSlice'
-import { NavLink, useLocation } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import './header.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { getLocation } from '../../redux/reducers/locationAuto';
+import { getweather } from '../../redux/reducers/weatherSlice';
+import currentData, { currentSearch } from '../../redux/reducers/currentData';
+import { recentData } from '../../redux/reducers/recentSlice';
+import { getrecentData } from '../../redux/reducers/getRecentSlice';
+import { getFavouriteData } from '../../redux/reducers/getFavSlice';
+import { NavLink, useLocation } from 'react-router-dom';
 
 const Header = () => {
-  const [searchValue, setSearchValue] = useState('')
-  const [showAutoComplete, setShowAutoComplete] = useState(false)
-  const [Submit, setSubmit] = useState(false)
-  const [mobilesearch, setMobileSearch] = useState(false)
-  const [showMobileMenu, setShowMobileMenu] = useState(false)
+  const [searchValue, setSearchValue] = useState('');
+  const [showAutoComplete, setShowAutoComplete] = useState(false);
+  const [Submit, setSubmit] = useState(false);
+  const [mobilesearch, setMobileSearch] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
-  const dispatch = useDispatch()
-  const location = useSelector((state: any) => state.location)
-  const weather = useSelector((state: any) => state.weather)
-  const currData = useSelector((state: any) => state.search)
-  const getRecent = useSelector((state: any) => state.getrecent.data)
-  const fav = useSelector((state: any) => state.getFavourite.data)
+  const dispatch = useDispatch();
+  const location = useSelector((state: any) => state.location);
+  const weather = useSelector((state: any) => state.weather);
+  const currData = useSelector((state: any) => state.search);
+  const getRecent = useSelector((state: any) => state.getrecent.data);
+  const fav = useSelector((state: any) => state.getFavourite.data);
 
-  const currPath = useLocation()
+  const currPath = useLocation();
 
-  console.log('location', currPath)
+  console.log('location', currPath);
 
   const onChangeHandler = (searchString: string) => {
-    setSearchValue(searchString)
-    dispatch(getLocation(searchString))
-  }
+    setSearchValue(searchString);
+    dispatch(getLocation(searchString));
+  };
 
   useEffect(() => {
-    dispatch(getFavouriteData())
-  }, [currData])
+    dispatch(getFavouriteData());
+  }, [currData]);
 
   const data: any = weather &&
     weather.data &&
@@ -53,35 +53,35 @@ const Header = () => {
       wind: weather.data.data.current.wind_mph,
       visibility: weather.data.data.current.vis_miles,
       fav: false,
-    }
+    };
 
   useEffect(() => {
-    data && dispatch(currentSearch(data))
-    dispatch(getrecentData())
-  }, [weather])
+    data && dispatch(currentSearch(data));
+    dispatch(getrecentData());
+  }, [weather]);
 
   const submitHandler = (e: any) => {
-    e.preventDefault()
-    dispatch(getweather(e.target.search.value))
-    setShowAutoComplete(false)
-    setSubmit(true)
-  }
+    e.preventDefault();
+    dispatch(getweather(e.target.search.value));
+    setShowAutoComplete(false);
+    setSubmit(true);
+  };
 
   useEffect(() => {
-    console.log('current', currData.search, fav)
-    dispatch(recentData(currData.search))
-    setSubmit(false)
-    dispatch(getrecentData())
-  }, [currData])
+    console.log('current', currData.search, fav.data);
+    Submit && dispatch(recentData(currData.search));
+    setSubmit(false);
+    dispatch(getrecentData());
+  }, [currData]);
 
-  useEffect(() => {}, [getRecent])
+  useEffect(() => {}, [getRecent]);
 
   return (
     <div className="header">
       <div
         className="menuIcon"
         onClick={() => {
-          setShowMobileMenu(true)
+          setShowMobileMenu(true);
         }}
       >
         <img
@@ -105,11 +105,11 @@ const Header = () => {
           placeholder="Search city"
           value={searchValue}
           onChange={(e: any) => {
-            onChangeHandler(e.target.value)
+            onChangeHandler(e.target.value);
           }}
           name="search"
           onFocus={() => {
-            setShowAutoComplete(true)
+            setShowAutoComplete(true);
           }}
           autoComplete="off"
         />
@@ -125,7 +125,7 @@ const Header = () => {
           alt="back"
           className="mobileBack"
           onClick={() => {
-            setMobileSearch(false)
+            setMobileSearch(false);
           }}
         />
         <div className="headerAutoComplete">
@@ -136,27 +136,27 @@ const Header = () => {
             location.data.data.map(
               (
                 ele: { name: string; region: string; lat: number; lon: number },
-                i: number,
+                i: number
               ) => (
                 <div
                   key={i}
                   className="headerAutoCompleteItems"
                   onClick={() => {
-                    dispatch(getweather(`${ele.lat},${ele.lon}`))
-                    setShowAutoComplete(false)
-                    setSubmit(true)
+                    dispatch(getweather(`${ele.lat},${ele.lon}`));
+                    setShowAutoComplete(false);
+                    setSubmit(true);
                   }}
                 >
                   {ele.name}, {ele.region}
                 </div>
-              ),
+              )
             )}
         </div>
       </form>
       <div
         className="mobileSearchIcon"
         onClick={() => {
-          setMobileSearch(!mobilesearch)
+          setMobileSearch(!mobilesearch);
         }}
       >
         {' '}
@@ -174,7 +174,7 @@ const Header = () => {
             <NavLink
               to="/"
               onClick={() => {
-                setShowMobileMenu(false)
+                setShowMobileMenu(false);
               }}
             >
               Home
@@ -184,7 +184,7 @@ const Header = () => {
             <NavLink
               to="/favourites"
               onClick={() => {
-                setShowMobileMenu(false)
+                setShowMobileMenu(false);
               }}
             >
               Favourite
@@ -194,7 +194,7 @@ const Header = () => {
             <NavLink
               to="/recent"
               onClick={() => {
-                setShowMobileMenu(false)
+                setShowMobileMenu(false);
               }}
             >
               Recent Search
@@ -203,7 +203,7 @@ const Header = () => {
         </div>
       </aside>
     </div>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
