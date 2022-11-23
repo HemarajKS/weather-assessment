@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Modal from 'react-modal'
 import './recent.css'
+import { deleteData } from '../../redux/reducers/deleteSlice'
+import { getrecentData } from '../../redux/reducers/getRecentSlice'
 const Recent = () => {
   const dispatch = useDispatch()
 
@@ -21,7 +23,8 @@ const Recent = () => {
     for (var key in recent.data) {
       if (recent.data.hasOwnProperty(key)) {
         console.log(key)
-
+        dispatch(deleteData({ page: 'recent', id: key }))
+        dispatch(getrecentData())
         closeModal()
       }
     }
