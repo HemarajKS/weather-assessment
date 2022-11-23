@@ -90,8 +90,6 @@ const Recent = () => {
       return fav.data[key].id;
     });
 
-  console.log(myData);
-
   return (
     <>
       <div className="mobileHeader">Recent Search</div>
