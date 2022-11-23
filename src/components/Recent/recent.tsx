@@ -68,6 +68,23 @@ const Recent = () => {
   //     recent.data &&
   //     console.log('recent fav', favData.data, recent.data)
   // }, [favData])
+
+  console.log(
+    'recent Data',
+    recent && recent.data && recent.data && Object.values(recent.data)
+  );
+
+  const arr =
+    recent && recent.data && recent.data && Object.values(recent.data);
+
+  const unique = arr
+    .map((e: any) => e['id'])
+    .map((e: any, i: any, final: any) => final.indexOf(e) === i && i)
+    .filter((obj: any) => arr[obj])
+    .map((e: any) => arr[e]);
+
+  console.log(unique);
+
   return (
     <>
       <div className="mobileHeader">Recent Search</div>
