@@ -98,6 +98,11 @@ const Recent = () => {
               recent.data &&
               recent.data &&
               unique.reverse().map((key: any, i: any) => {
+                let x = true;
+                console.log('recent key', key);
+                if (key.id === '14.68,75.48') {
+                  x = false;
+                }
                 return (
                   <div className="favouritesBody" key={i}>
                     <div className="favouritesBodyDown">
@@ -121,7 +126,7 @@ const Recent = () => {
                         // deleteFav(ele.id);
                       }}
                     >
-                      {key.liked ? (
+                      {x ? (
                         <img
                           src={require('../../assets/icons/icon_favourite_Active.png')}
                           alt="fav"
