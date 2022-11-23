@@ -122,7 +122,7 @@ img.mobileBack {
         left: 0;
         bottom: 0;
         right: 20%;
-        z-index: 10;
+        z-index: 331;
         background-color: white;
         padding: 10% 0 0 10%;
         animation-name: sideBar;
