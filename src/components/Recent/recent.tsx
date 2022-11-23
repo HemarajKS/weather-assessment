@@ -8,6 +8,7 @@ import { useLocation } from 'react-router-dom';
 const Recent = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const fav = useSelector((state: any) => state.getFavourite.data);
 
   useEffect(() => {
     dispatch(getrecentData());
@@ -82,6 +83,15 @@ const Recent = () => {
       .filter((obj: any) => arr[obj])
       .map((e: any) => arr[e]);
 
+  var myData =
+    fav &&
+    fav.data &&
+    Object.keys(fav.data).map((key) => {
+      return fav.data[key].id;
+    });
+
+  console.log(myData);
+
   return (
     <>
       <div className="mobileHeader">Recent Search</div>
@@ -98,10 +108,10 @@ const Recent = () => {
               recent.data &&
               recent.data &&
               unique.reverse().map((key: any, i: any) => {
-                let x = true;
+                let x = false;
                 console.log('recent key', key);
-                if (key.id === '14.68,75.48') {
-                  x = false;
+                if (myData.includes(key.id)) {
+                  x = true;
                 }
                 return (
                   <div className="favouritesBody" key={i}>
