@@ -15,7 +15,7 @@ const Recent = () => {
 
   useEffect(() => {
     dispatch(getrecentData())
-  }, [recent])
+  }, [])
 
   const [modalIsOpen, setIsOpen] = React.useState(false)
 
@@ -26,8 +26,6 @@ const Recent = () => {
   function closeModal() {
     setIsOpen(false)
   }
-
-  console.log('res', recent.data)
 
   const deleteAll = () => {
     for (var key in recent.data) {
@@ -95,7 +93,8 @@ const Recent = () => {
                         <img src={recent.data[key].icon} alt="sunny" />
                       </div>
                       <div className="favTemp">
-                        {recent.data[key].temp_c.toFixed(0)}{' '}
+                        {recent.data[key].temp_c &&
+                          recent.data[key].temp_c.toFixed(0)}{' '}
                         <span>{'\u00B0'}C</span>
                       </div>
                       <div className="favCond">

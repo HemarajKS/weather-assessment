@@ -10,6 +10,7 @@ import { getrecentData } from '../../redux/reducers/getRecentSlice'
 const Header = () => {
   const [searchValue, setSearchValue] = useState('')
   const [showAutoComplete, setShowAutoComplete] = useState(false)
+  const [Submit, setSubmit] = useState(false)
 
   const dispatch = useDispatch()
   const location = useSelector((state: any) => state.location)
@@ -21,6 +22,10 @@ const Header = () => {
     setSearchValue(searchString)
     dispatch(getLocation(searchString))
   }
+
+  useEffect(() => {
+    console.log('current Data', currData)
+  }, [currData])
 
   const data: any = weather &&
     weather.data &&
@@ -50,12 +55,15 @@ const Header = () => {
     e.preventDefault()
     dispatch(getweather(e.target.search.value))
     setShowAutoComplete(false)
+    setSubmit(true)
   }
 
   useEffect(() => {
-    console.log('recent data', getRecent.data)
-    // dispatch(recentData(currData.search));
-  }, [currData, getRecent])
+    console.log('current', currData)
+    dispatch(recentData(currData.search))
+    setSubmit(false)
+    dispatch(getrecentData())
+  }, [currData])
 
   useEffect(() => {}, [getRecent])
 
@@ -102,6 +110,7 @@ const Header = () => {
                   onClick={() => {
                     dispatch(getweather(`${ele.lat},${ele.lon}`))
                     setShowAutoComplete(false)
+                    setSubmit(true)
                   }}
                 >
                   {ele.name}, {ele.region}

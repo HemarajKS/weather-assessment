@@ -17,7 +17,7 @@ const Favourites = () => {
 
   useEffect(() => {
     dispatch(getFavouriteData())
-  }, [fav])
+  }, [del])
 
   const deleteAll = () => {
     // closeModal()
