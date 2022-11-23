@@ -103,6 +103,8 @@ img.mobileBack {
     }
     .invertImage {
         filter: invert(1);
+        position: fixed;
+        top: 22px;
     }
     .menuIcon {
         display: block;
