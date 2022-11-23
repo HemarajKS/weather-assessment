@@ -69,7 +69,7 @@ const Header = () => {
 
   useEffect(() => {
     console.log('current', currData.search, fav.data);
-    Submit && dispatch(recentData(currData.search));
+    dispatch(recentData(currData.search));
     setSubmit(false);
     dispatch(getrecentData());
   }, [currData]);
