@@ -9,8 +9,6 @@ const Recent = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  console.log('location', location);
-
   useEffect(() => {
     dispatch(getrecentData());
   }, []);

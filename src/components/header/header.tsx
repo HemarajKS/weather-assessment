@@ -25,8 +25,6 @@ const Header = () => {
 
   const currPath = useLocation();
 
-  console.log('location', currPath);
-
   const onChangeHandler = (searchString: string) => {
     setSearchValue(searchString);
     dispatch(getLocation(searchString));
@@ -68,13 +66,31 @@ const Header = () => {
   };
 
   useEffect(() => {
-    console.log('current', currData.search, fav.data);
+    dispatch(getrecentData());
+    console.log('current', currData.search, getRecent.data);
     dispatch(recentData(currData.search));
     setSubmit(false);
-    dispatch(getrecentData());
   }, [currData]);
 
   useEffect(() => {}, [getRecent]);
+
+  let arr: any = [
+    { id: 10, name: 'someName1' },
+    { id: 10, name: 'someName2' },
+    { id: 11, name: 'someName3' },
+    { id: 12, name: 'someName4' },
+    { id: 11, name: 'someName3' },
+    { id: 12, name: 'someName4' },
+    { id: 11, name: 'someName3' },
+    { id: 12, name: 'someName4' },
+  ];
+  const unique = arr
+    .map((e: any) => e['id'])
+    .map((e: any, i: any, final: any) => final.indexOf(e) === i && i)
+    .filter((obj: any) => arr[obj])
+    .map((e: any) => arr[e]);
+
+  console.log(unique);
 
   return (
     <div className="header">
