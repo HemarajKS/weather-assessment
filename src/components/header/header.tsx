@@ -59,8 +59,8 @@ const Header = () => {
   }
 
   useEffect(() => {
-    console.log('current', currData)
-    dispatch(recentData(currData.search))
+    console.log('current', currData.search, getRecent.data)
+    // dispatch(recentData(currData.search))
     setSubmit(false)
     dispatch(getrecentData())
   }, [currData])
