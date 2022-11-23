@@ -1,78 +1,79 @@
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 5% 0;
-  width: 100%;
-  gap: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5% 0;
+    width: 100%;
+    gap: 20px;
 }
 
 .headerSearchSubmit {
-  background: none;
-  border: none;
-  outline: none;
+    background: none;
+    border: none;
+    outline: none;
 }
 
 .headerSearch {
-  width: 100%;
-  max-width: 450px;
-  height: 100%;
-  position: relative;
+    width: 100%;
+    max-width: 450px;
+    height: 100%;
+    position: relative;
 }
 
 .headerSearchIcon {
-  position: absolute;
-  cursor: pointer;
-  top: 28%;
-  right: 5%;
+    position: absolute;
+    cursor: pointer;
+    top: 28%;
+    right: 5%;
 }
 
 .headerSearchInput {
-  border: 0.8px solid #ffffff4e;
-  background: var(--grey);
-  font-size: 120%;
-  outline: none;
-  padding: 2% 2.5%;
-  width: 100%;
-  border-radius: 2.5px;
-  letter-spacing: 0;
-  line-height: 19px;
+    border: 0.8px solid #ffffff4e;
+    background: var(--grey);
+    font-size: 120%;
+    outline: none;
+    padding: 2% 2.5%;
+    width: 100%;
+    border-radius: 2.5px;
+    letter-spacing: 0;
+    line-height: 19px;
 }
 
 .headerSearchInput::placeholder {
-  color: #ffffff9e;
-  letter-spacing: 0;
-  line-height: 19px;
+    color: #ffffff9e;
+    letter-spacing: 0;
+    line-height: 19px;
 }
 
 .headerSearchInput:-ms-input-placeholder {
-  color: #ffffff9e;
-  letter-spacing: 0;
-  line-height: 19px;
+    color: #ffffff9e;
+    letter-spacing: 0;
+    line-height: 19px;
 }
 
 .headerSearchInput::-ms-input-placeholder {
-  color: #ffffff9e;
-  letter-spacing: 0;
-  line-height: 19px;
+    color: #ffffff9e;
+    letter-spacing: 0;
+    line-height: 19px;
 }
 
 .headerLogo {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .headerAutoComplete {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  background-color: #ffffff;
-  width: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    width: 100%;
+    z-index: 999;
 }
 
 .headerAutoCompleteItems {
-  color: #75889f;
-  padding: 2% 2.2%;
-  font-size: 1.2em;
-  border-bottom: 0.1px solid #00000030;
-  cursor: pointer;
+    color: #75889f;
+    padding: 2% 2.2%;
+    font-size: 1.2em;
+    border-bottom: 0.1px solid #00000030;
+    cursor: pointer;
 }

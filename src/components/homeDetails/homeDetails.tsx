@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import Switch from 'react-switch';
-import './homeDetails.css';
+import React, { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import Switch from 'react-switch'
+import './homeDetails.css'
 
 const HomeDetails = () => {
-  const [checked, setChecked] = useState(true);
-  const weather: any = useSelector((state: any) => state.search);
+  const [checked, setChecked] = useState(true)
+  const weather: any = useSelector((state: any) => state.search)
 
   const handleChange = (nextChecked: boolean) => {
-    setChecked(nextChecked);
-  };
+    setChecked(nextChecked)
+  }
 
-  console.log('searched', weather);
+  console.log('searched', weather)
   return (
     <div className="homeBodyContainer">
       <div className="HomePage">
@@ -61,8 +61,8 @@ const HomeDetails = () => {
               <div className="homePageWeatherTemp">
                 {' '}
                 {checked
-                  ? weather.search.temp_f + '\u00B0'
-                  : weather.search.temp_c + '\u00B0'}{' '}
+                  ? weather.search.temp_f.toFixed(0) + '\u00B0'
+                  : weather.search.temp_c.toFixed(0) + '\u00B0'}{' '}
               </div>
               <div className="homePageWeatherUnit">
                 <Switch
@@ -141,7 +141,7 @@ const HomeDetails = () => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default HomeDetails;
+export default HomeDetails

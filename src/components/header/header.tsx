@@ -1,26 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import './header.css';
-import { useSelector, useDispatch } from 'react-redux';
-import { getLocation } from '../../redux/reducers/locationAuto';
-import { getweather } from '../../redux/reducers/weatherSlice';
-import currentData, { currentSearch } from '../../redux/reducers/currentData';
-import { recentData } from '../../redux/reducers/recentSlice';
-import { getrecentData } from '../../redux/reducers/getRecentSlice';
+import React, { useEffect, useState } from 'react'
+import './header.css'
+import { useSelector, useDispatch } from 'react-redux'
+import { getLocation } from '../../redux/reducers/locationAuto'
+import { getweather } from '../../redux/reducers/weatherSlice'
+import currentData, { currentSearch } from '../../redux/reducers/currentData'
+import { recentData } from '../../redux/reducers/recentSlice'
+import { getrecentData } from '../../redux/reducers/getRecentSlice'
 
 const Header = () => {
-  const [searchValue, setSearchValue] = useState('');
-  const [showAutoComplete, setShowAutoComplete] = useState(false);
+  const [searchValue, setSearchValue] = useState('')
+  const [showAutoComplete, setShowAutoComplete] = useState(false)
 
-  const dispatch = useDispatch();
-  const location = useSelector((state: any) => state.location);
-  const weather = useSelector((state: any) => state.weather);
-  const currData = useSelector((state: any) => state.search);
-  const getRecent = useSelector((state: any) => state.getrecent.data);
+  const dispatch = useDispatch()
+  const location = useSelector((state: any) => state.location)
+  const weather = useSelector((state: any) => state.weather)
+  const currData = useSelector((state: any) => state.search)
+  const getRecent = useSelector((state: any) => state.getrecent.data)
 
   const onChangeHandler = (searchString: string) => {
-    setSearchValue(searchString);
-    dispatch(getLocation(searchString));
-  };
+    setSearchValue(searchString)
+    dispatch(getLocation(searchString))
+  }
 
   const data: any = weather &&
     weather.data &&
@@ -39,25 +39,25 @@ const Header = () => {
       wind: weather.data.data.current.wind_mph,
       visibility: weather.data.data.current.vis_miles,
       fav: false,
-    };
+    }
 
   useEffect(() => {
-    data && dispatch(currentSearch(data));
-    dispatch(getrecentData());
-  }, [weather]);
+    data && dispatch(currentSearch(data))
+    dispatch(getrecentData())
+  }, [weather])
 
   const submitHandler = (e: any) => {
-    e.preventDefault();
-    dispatch(getweather(e.target.search.value));
-    setShowAutoComplete(false);
-  };
+    e.preventDefault()
+    dispatch(getweather(e.target.search.value))
+    setShowAutoComplete(false)
+  }
 
   useEffect(() => {
-    console.log('recent data', getRecent.data);
-    dispatch(recentData(currData.search));
-  }, [currData, getRecent]);
+    console.log('recent data', getRecent.data)
+    // dispatch(recentData(currData.search));
+  }, [currData, getRecent])
 
-  useEffect(() => {}, [getRecent]);
+  useEffect(() => {}, [getRecent])
 
   return (
     <div className="header">
@@ -71,11 +71,11 @@ const Header = () => {
           placeholder="Search city"
           value={searchValue}
           onChange={(e: any) => {
-            onChangeHandler(e.target.value);
+            onChangeHandler(e.target.value)
           }}
           name="search"
           onFocus={() => {
-            setShowAutoComplete(true);
+            setShowAutoComplete(true)
           }}
           autoComplete="off"
         />
@@ -94,24 +94,24 @@ const Header = () => {
             location.data.data.map(
               (
                 ele: { name: string; region: string; lat: number; lon: number },
-                i: number
+                i: number,
               ) => (
                 <div
                   key={i}
                   className="headerAutoCompleteItems"
                   onClick={() => {
-                    dispatch(getweather(`${ele.lat},${ele.lon}`));
-                    setShowAutoComplete(false);
+                    dispatch(getweather(`${ele.lat},${ele.lon}`))
+                    setShowAutoComplete(false)
                   }}
                 >
                   {ele.name}, {ele.region}
                 </div>
-              )
+              ),
             )}
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
