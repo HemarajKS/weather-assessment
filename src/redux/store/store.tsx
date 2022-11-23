@@ -1,5 +1,7 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import searchSlice from '../reducers/currentData';
+import FavouriteSlice from '../reducers/favouriteSlice';
+import getFavouriteSlice from '../reducers/getFavSlice';
 import getrecentSlice from '../reducers/getRecentSlice';
 import locationSlice from '../reducers/locationAuto';
 import recentSlice from '../reducers/recentSlice';
@@ -12,6 +14,8 @@ export const store = configureStore({
     search: searchSlice.reducer,
     recent: recentSlice.reducer,
     getrecent: getrecentSlice.reducer,
+    Favourite: FavouriteSlice.reducer,
+    getFavourite: getFavouriteSlice.reducer,
   },
   middleware: getDefaultMiddleware({
     serializableCheck: false,
