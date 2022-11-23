@@ -44,6 +44,7 @@ const HomeDetails = () => {
         setfavExist(false)
       }
     }
+    dispatch(getFavouriteData())
   }
   return (
     <div className="homeBodyContainer">
