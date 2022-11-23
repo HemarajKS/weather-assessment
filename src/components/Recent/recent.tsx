@@ -97,7 +97,7 @@ const Recent = () => {
             {recent &&
               recent.data &&
               recent.data &&
-              unique.map((key: any, i: any) => {
+              unique.reverse().map((key: any, i: any) => {
                 return (
                   <div className="favouritesBody" key={i}>
                     <div className="favouritesBodyDown">

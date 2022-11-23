@@ -69,42 +69,44 @@ const Favourites = () => {
           {fav &&
             fav.data &&
             Object.keys(fav.data).length > 0 &&
-            Object.keys(fav.data).map((key: any, i: any) => {
-              return (
-                <div className="favouritesBody" key={i}>
-                  <div className="favouritesBodyDown">
-                    <div className="favPlace">
-                      {fav.data[key].place && fav.data[key].place},{' '}
-                      {fav.data[key].region && fav.data[key].region}
+            Object.keys(fav.data)
+              .reverse()
+              .map((key: any, i: any) => {
+                return (
+                  <div className="favouritesBody" key={i}>
+                    <div className="favouritesBodyDown">
+                      <div className="favPlace">
+                        {fav.data[key].place && fav.data[key].place},{' '}
+                        {fav.data[key].region && fav.data[key].region}
+                      </div>
+                      <div className="favouritebodyDownLower">
+                        <div className="favIcon">
+                          <img src={fav.data[key].icon} alt="sunny" />
+                        </div>
+                        <div className="favTemp">
+                          {fav.data[key].temp_c &&
+                            fav.data[key].temp_c.toFixed(0)}{' '}
+                          <span>{'\u00B0'}C</span>
+                        </div>
+                        <div className="favCond">
+                          {fav.data[key].condition && fav.data[key].condition}
+                        </div>
+                      </div>
                     </div>
-                    <div className="favouritebodyDownLower">
-                      <div className="favIcon">
-                        <img src={fav.data[key].icon} alt="sunny" />
-                      </div>
-                      <div className="favTemp">
-                        {fav.data[key].temp_c &&
-                          fav.data[key].temp_c.toFixed(0)}{' '}
-                        <span>{'\u00B0'}C</span>
-                      </div>
-                      <div className="favCond">
-                        {fav.data[key].condition && fav.data[key].condition}
-                      </div>
+                    <div
+                      className="favLike"
+                      onClick={() => {
+                        deleteFav(key);
+                      }}
+                    >
+                      <img
+                        src={require('../../assets/icons/icon_favourite_Active.png')}
+                        alt="fav"
+                      />
                     </div>
                   </div>
-                  <div
-                    className="favLike"
-                    onClick={() => {
-                      deleteFav(key);
-                    }}
-                  >
-                    <img
-                      src={require('../../assets/icons/icon_favourite_Active.png')}
-                      alt="fav"
-                    />
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })}
         </div>
       ) : (
         <div className="noFavAdded">
