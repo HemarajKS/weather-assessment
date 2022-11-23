@@ -177,10 +177,11 @@ img.mobileBack {
   .headerAutoComplete {
     position: absolute;
     background-color: #ffffff;
-    width: 100vw;
+    /* width: 100vw; */
     min-height: 100vh;
     top: 67px;
-    height: 100%;
+    right: 0;
+    left: 0;
     overflow: auto;
     z-index: 999;
   }
