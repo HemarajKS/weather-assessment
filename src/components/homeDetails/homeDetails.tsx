@@ -62,6 +62,11 @@ const HomeDetails = () => {
       clearInterval(timerId);
     };
   }, []);
+
+  useEffect(() => {
+    dispatch(getFavouriteData());
+  }, [setfavExist]);
+
   return (
     <div className="homeBodyContainer">
       <div className="HomePage">
