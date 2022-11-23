@@ -161,7 +161,7 @@ img.mobileBack {
         left: 0;
         height: auto;
         max-width: initial;
-        z-index: 10;
+        z-index: 500;
     }
     img.mobileBack {
         display: block;
