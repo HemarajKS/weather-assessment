@@ -69,21 +69,18 @@ const Recent = () => {
   //     console.log('recent fav', favData.data, recent.data)
   // }, [favData])
 
-  console.log(
-    'recent Data',
-    recent && recent.data && recent.data && Object.values(recent.data)
-  );
-
   const arr =
     recent && recent.data && recent.data && Object.values(recent.data);
 
-  const unique = arr
-    .map((e: any) => e['id'])
-    .map((e: any, i: any, final: any) => final.indexOf(e) === i && i)
-    .filter((obj: any) => arr[obj])
-    .map((e: any) => arr[e]);
-
-  console.log(unique);
+  const unique =
+    recent &&
+    recent.data &&
+    recent.data &&
+    arr
+      .map((e: any) => e['id'])
+      .map((e: any, i: any, final: any) => final.indexOf(e) === i && i)
+      .filter((obj: any) => arr[obj])
+      .map((e: any) => arr[e]);
 
   return (
     <>
@@ -100,53 +97,47 @@ const Recent = () => {
             {recent &&
               recent.data &&
               recent.data &&
-              Object.keys(recent.data)
-                .slice(0)
-                .reverse()
-                .map((key: any, i: any) => {
-                  return (
-                    <div className="favouritesBody" key={i}>
-                      <div className="favouritesBodyDown">
-                        <div className="favPlace">
-                          {recent.data[key].place}, {recent.data[key].region}
-                        </div>
-                        <div className="favouritebodyDownLower">
-                          <div className="favIcon">
-                            <img src={recent.data[key].icon} alt="sunny" />
-                          </div>
-                          <div className="favTemp">
-                            {recent.data[key].temp_c &&
-                              recent.data[key].temp_c.toFixed(0)}{' '}
-                            <span>{'\u00B0'}C</span>
-                          </div>
-                          <div className="favCond">
-                            {recent.data[key].condition}
-                          </div>
-                        </div>
+              unique.map((key: any, i: any) => {
+                return (
+                  <div className="favouritesBody" key={i}>
+                    <div className="favouritesBodyDown">
+                      <div className="favPlace">
+                        {key.place}, {key.region}
                       </div>
-                      <div
-                        className="favLike"
-                        onClick={() => {
-                          // deleteFav(ele.id);
-                        }}
-                      >
-                        {recent.data[key].liked ? (
-                          <img
-                            src={require('../../assets/icons/icon_favourite_Active.png')}
-                            alt="fav"
-                          />
-                        ) : (
-                          <img
-                            src={require('../../assets/icons/icon_favourite.png')}
-                            alt="fav"
-                            width={18}
-                            height={18}
-                          />
-                        )}
+                      <div className="favouritebodyDownLower">
+                        <div className="favIcon">
+                          <img src={key.icon} alt="sunny" />
+                        </div>
+                        <div className="favTemp">
+                          {key.temp_c && key.temp_c.toFixed(0)}{' '}
+                          <span>{'\u00B0'}C</span>
+                        </div>
+                        <div className="favCond">{key.condition}</div>
                       </div>
                     </div>
-                  );
-                })}
+                    <div
+                      className="favLike"
+                      onClick={() => {
+                        // deleteFav(ele.id);
+                      }}
+                    >
+                      {key.liked ? (
+                        <img
+                          src={require('../../assets/icons/icon_favourite_Active.png')}
+                          alt="fav"
+                        />
+                      ) : (
+                        <img
+                          src={require('../../assets/icons/icon_favourite.png')}
+                          alt="fav"
+                          width={18}
+                          height={18}
+                        />
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
           </div>
           <Modal
             isOpen={modalIsOpen}
