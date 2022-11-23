@@ -214,4 +214,20 @@
   .favourites {
     width: 93vw;
   }
+  .ReactModal__Content.ReactModal__Content--after-open {
+    inset: auto 40px !important;
+    padding: unset !important;
+  }
+  .modalBtnYes {
+    background-color: transparent;
+    color: #673ab7;
+    font-family: 'robotoMedium';
+  }
+  .modalBtnNo {
+    background-color: transparent;
+    color: #673ab7;
+  }
+  .modalText {
+    color: rgba(0, 0, 0, 0.54);
+  }
 }
