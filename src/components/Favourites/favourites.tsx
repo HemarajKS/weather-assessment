@@ -13,6 +13,11 @@ const Favourites = () => {
   }, [])
 
   const fav = useSelector((state: any) => state.getFavourite.data)
+  const del = useSelector((state: any) => state.delete.isSuccess)
+
+  useEffect(() => {
+    dispatch(getFavouriteData())
+  }, [fav])
 
   const deleteAll = () => {
     // closeModal()
@@ -37,7 +42,10 @@ const Favourites = () => {
     setIsOpen(false)
   }
 
-  const deleteFav = (delId: any) => {}
+  const deleteFav = (delId: any) => {
+    dispatch(deleteData({ page: 'Favourite', id: delId }))
+    dispatch(getFavouriteData())
+  }
 
   console.log('fav', fav && fav.data)
 
