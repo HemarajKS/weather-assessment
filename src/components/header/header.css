@@ -40,19 +40,19 @@
 }
 
 .headerSearchInput::placeholder {
-    color: #ffffff9e;
+    color: #00000066;
     letter-spacing: 0;
     line-height: 19px;
 }
 
 .headerSearchInput:-ms-input-placeholder {
-    color: #ffffff9e;
+    color: #00000066;
     letter-spacing: 0;
     line-height: 19px;
 }
 
 .headerSearchInput::-ms-input-placeholder {
-    color: #ffffff9e;
+    color: #00000066;
     letter-spacing: 0;
     line-height: 19px;
 }
@@ -147,6 +147,7 @@ img.mobileBack {
         padding-left: 70px;
         color: black;
         box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.507);
+        border-bottom: 0.1px solid #00000030;
     }
     .headerSearch {
         position: fixed;
@@ -164,6 +165,23 @@ img.mobileBack {
         top: -46px;
         left: 21px;
         opacity: 0.8;
+        cursor: pointer;
+    }
+    .headerAutoComplete {
+        position: absolute;
+        background-color: #ffffff;
+        width: 100vw;
+        min-height: 100vh;
+        top: 67px;
+        height: 100%;
+        overflow: auto;
+        z-index: 999;
+    }
+    .headerAutoCompleteItems {
+        color: #000000;
+        padding: 5% 4.2%;
+        font-size: 1.2em;
+        border-bottom: 0.1px solid #00000030;
         cursor: pointer;
     }
     @keyframes sideBar {
