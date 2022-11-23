@@ -12,6 +12,7 @@ const HomeDetails = () => {
 
   const dispatch = useDispatch()
   const [checked, setChecked] = useState(true)
+  const [favExist, setfavExist] = useState(false)
   const weather: any = useSelector((state: any) => state.search)
   const fav: any = useSelector((state: any) => state.getFavourite.data)
 
@@ -19,7 +20,24 @@ const HomeDetails = () => {
     setChecked(nextChecked)
   }
 
-  console.log('searched', weather)
+  useEffect(() => {
+    console.log(
+      'searched',
+      weather && weather.search && weather.search.id,
+      fav && fav.data && fav.data,
+    )
+    for (var i = 0; i < Object.keys(fav.data).length; i++) {
+      console.log(fav.data[Object.keys(fav.data)[i]].id, weather.search.id)
+      if (fav.data[Object.keys(fav.data)[i]].id === weather.search.id) {
+        alert('exist')
+        setfavExist(true)
+        console.log('current key', Object.keys(fav.data)[i])
+        return
+      } else {
+        console.log('current key', Object.keys(fav.data)[i])
+      }
+    }
+  }, [weather, fav])
   return (
     <div className="homeBodyContainer">
       <div className="HomePage">
@@ -30,14 +48,26 @@ const HomeDetails = () => {
         )}
         {weather && weather.search && (
           <>
-            {!weather.search.fav ? (
+            {favExist ? (
               <div
                 className="homePageFav"
                 onClick={() => {
                   console.log('remove', weather.search, fav.data)
                   console.log('removeee', Object.keys(fav.data))
                   for (var i = 0; i < Object.keys(fav.data).length; i++) {
-                    console.log(fav.data[Object.keys(fav.data)[i]].id)
+                    console.log(
+                      fav.data[Object.keys(fav.data)[i]].id,
+                      weather.search.id,
+                    )
+                    if (
+                      fav.data[Object.keys(fav.data)[i]].id ===
+                      weather.search.id
+                    ) {
+                      alert('exist')
+                      setfavExist(false)
+                      console.log('current key', Object.keys(fav.data)[i])
+                      return
+                    }
                   }
                 }}
               >
@@ -57,6 +87,22 @@ const HomeDetails = () => {
                 className="homePageFav"
                 onClick={() => {
                   dispatch(FavouriteData(weather.search))
+                  console.log('remove', weather.search, fav.data)
+                  console.log('removeee', Object.keys(fav.data))
+                  for (var i = 0; i < Object.keys(fav.data).length; i++) {
+                    console.log(
+                      fav.data[Object.keys(fav.data)[i]].id,
+                      weather.search.id,
+                    )
+                    if (
+                      fav.data[Object.keys(fav.data)[i]].id ===
+                      weather.search.id
+                    ) {
+                      alert('exist')
+                      setfavExist(true)
+                      return
+                    }
+                  }
                 }}
               >
                 <div className="homePageFavIcon">
