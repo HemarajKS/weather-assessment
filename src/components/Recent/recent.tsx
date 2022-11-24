@@ -1,45 +1,47 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import Modal from 'react-modal';
-import './recent.css';
-import { deleteData } from '../../redux/reducers/deleteSlice';
-import { getrecentData } from '../../redux/reducers/getRecentSlice';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import Modal from 'react-modal'
+import './recent.css'
+import { deleteData } from '../../redux/reducers/deleteSlice'
+import { getrecentData } from '../../redux/reducers/getRecentSlice'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { getweather } from '../../redux/reducers/weatherSlice'
 const Recent = () => {
-  const dispatch = useDispatch();
-  const location = useLocation();
-  const fav = useSelector((state: any) => state.getFavourite.data);
+  const dispatch = useDispatch()
+  const location = useLocation()
+  const navigate = useNavigate()
+  const fav = useSelector((state: any) => state.getFavourite.data)
 
   useEffect(() => {
-    dispatch(getrecentData());
-  }, []);
+    dispatch(getrecentData())
+  }, [])
 
-  const recent: any = useSelector((state: any) => state.getrecent.data);
+  const recent: any = useSelector((state: any) => state.getrecent.data)
 
   useEffect(() => {
-    dispatch(getrecentData());
-  }, []);
+    dispatch(getrecentData())
+  }, [])
 
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [modalIsOpen, setIsOpen] = React.useState(false)
 
   function openModal() {
-    setIsOpen(true);
+    setIsOpen(true)
   }
 
   function closeModal() {
-    setIsOpen(false);
+    setIsOpen(false)
   }
 
   const deleteAll = () => {
     for (var key in recent.data) {
       if (recent.data.hasOwnProperty(key)) {
-        console.log(key);
-        dispatch(deleteData({ page: 'recent', id: key }));
-        dispatch(getrecentData());
-        closeModal();
+        console.log(key)
+        dispatch(deleteData({ page: 'recent', id: key }))
+        dispatch(getrecentData())
+        closeModal()
       }
     }
-  };
+  }
 
   // recent &&
   //   recent.data &&
@@ -70,8 +72,7 @@ const Recent = () => {
   //     console.log('recent fav', favData.data, recent.data)
   // }, [favData])
 
-  const arr =
-    recent && recent.data && recent.data && Object.values(recent.data);
+  const arr = recent && recent.data && recent.data && Object.values(recent.data)
 
   const unique =
     recent &&
@@ -81,14 +82,14 @@ const Recent = () => {
       .map((e: any) => e['id'])
       .map((e: any, i: any, final: any) => final.indexOf(e) === i && i)
       .filter((obj: any) => arr[obj])
-      .map((e: any) => arr[e]);
+      .map((e: any) => arr[e])
 
   var myData =
     fav &&
     fav.data &&
     Object.keys(fav.data).map((key) => {
-      return fav.data[key].id;
-    });
+      return fav.data[key].id
+    })
 
   return (
     <>
@@ -109,15 +110,21 @@ const Recent = () => {
               myData &&
               myData.length > 0 &&
               unique.reverse().map((key: any, i: any) => {
-                let x = false;
+                let x = false
 
                 if (myData.includes(key.id)) {
-                  x = true;
+                  x = true
                 }
                 return (
                   <div className="favouritesBody" key={i}>
                     <div className="favouritesBodyDown">
-                      <div className="favPlace">
+                      <div
+                        className="favPlace"
+                        onClick={() => {
+                          dispatch(getweather(key.id))
+                          navigate('/')
+                        }}
+                      >
                         {key.place}, {key.region}
                       </div>
                       <div className="favouritebodyDownLower">
@@ -152,7 +159,7 @@ const Recent = () => {
                       )}
                     </div>
                   </div>
-                );
+                )
               })}
           </div>
           <Modal
@@ -185,7 +192,7 @@ const Recent = () => {
         </div>
       )}
     </>
-  );
-};
+  )
+}
 
-export default Recent;
+export default Recent

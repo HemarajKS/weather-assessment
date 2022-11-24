@@ -4,13 +4,14 @@ import '../../components/Favourites/favpourites.css'
 import Modal from 'react-modal'
 import { getFavouriteData } from '../../redux/reducers/getFavSlice'
 import { deleteData } from '../../redux/reducers/deleteSlice'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import searchSlice from '../../redux/reducers/currentData'
 import { getweather } from '../../redux/reducers/weatherSlice'
 
 const Favourites = () => {
   const dispatch = useDispatch()
   const location = useLocation()
+  const navigate = useNavigate()
 
   useEffect(() => {
     dispatch(getFavouriteData())
@@ -81,6 +82,7 @@ const Favourites = () => {
                         className="favPlace"
                         onClick={() => {
                           dispatch(getweather(fav.data[key].id))
+                          navigate('/')
                         }}
                       >
                         {fav.data[key].place && fav.data[key].place},{' '}
