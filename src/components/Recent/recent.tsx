@@ -115,7 +115,11 @@ const Recent = () => {
                 Clear All
               </div>
             </div>
-            {myData &&
+            {recent &&
+              recent.data &&
+              recent.data &&
+              unique.length > 0 &&
+              myData &&
               myData.length > 0 &&
               unique.reverse().map((key: any, i: any) => {
                 let x = false
