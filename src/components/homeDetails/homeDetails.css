@@ -92,6 +92,10 @@
     text-transform: uppercase;
 }
 
+img.homePageWeatherIcon {
+    width: 100px;
+}
+
 @media screen and (max-width: 774px) {
     .HomePagebodyTabTime {
         display: block;

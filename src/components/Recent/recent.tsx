@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Modal from 'react-modal'
 import './recent.css'
@@ -6,7 +6,11 @@ import { deleteData } from '../../redux/reducers/deleteSlice'
 import { getrecentData } from '../../redux/reducers/getRecentSlice'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { getweather } from '../../redux/reducers/weatherSlice'
+import { FavouriteData } from '../../redux/reducers/favouriteSlice'
+import { getFavouriteData } from '../../redux/reducers/getFavSlice'
 const Recent = () => {
+  const [favset, setFavSet] = useState(false)
+
   const dispatch = useDispatch()
   const location = useLocation()
   const navigate = useNavigate()
@@ -42,6 +46,10 @@ const Recent = () => {
       }
     }
   }
+
+  useEffect(() => {
+    dispatch(getFavouriteData())
+  }, [fav])
 
   // recent &&
   //   recent.data &&
@@ -150,6 +158,7 @@ const Recent = () => {
                           alt="fav"
                           onClick={() => {
                             alert('dislike' + key.id)
+                            console.log('fav', fav && fav.data)
                           }}
                         />
                       ) : (
@@ -160,6 +169,9 @@ const Recent = () => {
                           height={18}
                           onClick={() => {
                             alert('like' + key.id)
+                            console.log('fav', key)
+                            dispatch(FavouriteData(key))
+                            setFavSet(true)
                           }}
                         />
                       )}
