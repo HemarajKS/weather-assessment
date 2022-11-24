@@ -148,6 +148,9 @@ const Recent = () => {
                         <img
                           src={require('../../assets/icons/icon_favourite_Active.png')}
                           alt="fav"
+                          onClick={() => {
+                            alert('dislike')
+                          }}
                         />
                       ) : (
                         <img
@@ -155,6 +158,9 @@ const Recent = () => {
                           alt="fav"
                           width={18}
                           height={18}
+                          onClick={() => {
+                            alert('like')
+                          }}
                         />
                       )}
                     </div>
