@@ -17,7 +17,7 @@
 }
 
 body {
-    background-image: url(http://localhost:3000/static/media/background.f502570a3ec65f738afd.png);
+    background-image: url(../src/assets/images/background.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
