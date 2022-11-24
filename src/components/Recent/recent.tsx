@@ -149,7 +149,7 @@ const Recent = () => {
                           src={require('../../assets/icons/icon_favourite_Active.png')}
                           alt="fav"
                           onClick={() => {
-                            alert('dislike')
+                            alert('dislike' + key.id)
                           }}
                         />
                       ) : (
@@ -159,7 +159,7 @@ const Recent = () => {
                           width={18}
                           height={18}
                           onClick={() => {
-                            alert('like')
+                            alert('like' + key.id)
                           }}
                         />
                       )}
