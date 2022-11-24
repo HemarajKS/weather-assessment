@@ -15,6 +15,7 @@ const Recent = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const fav = useSelector((state: any) => state.getFavourite.data)
+  const addFav = useSelector((state: any) => state.Favourite)
 
   useEffect(() => {
     dispatch(getrecentData())
@@ -47,9 +48,9 @@ const Recent = () => {
     }
   }
 
-  useEffect(() => {
-    dispatch(getFavouriteData())
-  }, [fav])
+  // useEffect(() => {
+  //   favset && dispatch(getFavouriteData())
+  // }, [favset && fav])
 
   // recent &&
   //   recent.data &&
@@ -79,6 +80,9 @@ const Recent = () => {
   //     recent.data &&
   //     console.log('recent fav', favData.data, recent.data)
   // }, [favData])
+  useEffect(() => {
+    addFav.isSuccess && dispatch(getFavouriteData())
+  }, [addFav])
 
   const arr = recent && recent.data && recent.data && Object.values(recent.data)
 
@@ -111,11 +115,7 @@ const Recent = () => {
                 Clear All
               </div>
             </div>
-            {recent &&
-              recent.data &&
-              recent.data &&
-              unique.length > 0 &&
-              myData &&
+            {myData &&
               myData.length > 0 &&
               unique.reverse().map((key: any, i: any) => {
                 let x = false
