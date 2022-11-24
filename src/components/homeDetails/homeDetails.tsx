@@ -27,12 +27,8 @@ const HomeDetails = () => {
   };
 
   useEffect(() => {
-    console.log(
-      'searched',
-      weather && weather.search && weather.search.id,
-      fav && fav.data && fav.data
-    );
     fav && fav.data && whetherLiked();
+    dispatch(getFavouriteData());
   }, [weather && weather.search && weather, fav && fav.data]);
 
   const whetherLiked = () => {
