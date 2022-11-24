@@ -166,7 +166,6 @@ const Recent = () => {
                           src={require('../../assets/icons/icon_favourite_Active.png')}
                           alt="fav"
                           onClick={() => {
-                            alert('dislike' + key.id)
                             Object.keys(fav.data).map((keyy) => {
                               if (fav.data[keyy].id === key.id) {
                                 dispatch(
