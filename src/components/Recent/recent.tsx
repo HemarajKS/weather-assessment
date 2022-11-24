@@ -16,6 +16,7 @@ const Recent = () => {
   const navigate = useNavigate()
   const fav = useSelector((state: any) => state.getFavourite.data)
   const addFav = useSelector((state: any) => state.Favourite)
+  const deleteFav = useSelector((state: any) => state.delete)
 
   useEffect(() => {
     dispatch(getrecentData())
@@ -83,6 +84,10 @@ const Recent = () => {
   useEffect(() => {
     addFav.isSuccess && dispatch(getFavouriteData())
   }, [addFav])
+
+  useEffect(() => {
+    dispatch(getFavouriteData())
+  }, [deleteFav])
 
   const arr = recent && recent.data && recent.data && Object.values(recent.data)
 
@@ -162,7 +167,13 @@ const Recent = () => {
                           alt="fav"
                           onClick={() => {
                             alert('dislike' + key.id)
-                            console.log('fav', fav && fav.data)
+                            Object.keys(fav.data).map((keyy) => {
+                              if (fav.data[keyy].id === key.id) {
+                                dispatch(
+                                  deleteData({ page: 'Favourite', id: keyy }),
+                                )
+                              }
+                            })
                           }}
                         />
                       ) : (
@@ -172,7 +183,6 @@ const Recent = () => {
                           width={18}
                           height={18}
                           onClick={() => {
-                            alert('like' + key.id)
                             console.log('fav', key)
                             dispatch(FavouriteData(key))
                             setFavSet(true)
