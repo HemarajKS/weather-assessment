@@ -213,6 +213,7 @@
   }
   .favourites {
     width: 93vw;
+    margin-bottom: 20px;
   }
   .ReactModal__Content.ReactModal__Content--after-open {
     inset: auto 40px !important;

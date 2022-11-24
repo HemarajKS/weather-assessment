@@ -53,8 +53,8 @@
     width: 100vw;
     overflow: auto;
     background-color: #ffffff1a;
-    padding: 5.5% 42px;
-    position: absolute;
-    bottom: 0;
+    padding: 11.5% 42px;
+    position: relative;
+    /* bottom: 2px; */
   }
 }
